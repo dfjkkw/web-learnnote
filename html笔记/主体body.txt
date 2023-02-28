@@ -1,0 +1,36 @@
+基本语法：
+<body>网页内容</body>
+
+body标记属性
+设置body标记属性可以改变页面的显示效果。该标记主要属性有topmargin、leftmargin、text、bgcolor、background、link、alink、vlink;
+
+基本语法
+<body leftmargin="50px" topmargin="50px" text="#000000" bgcolor="#339999" link="blue" alink="white" vlink="red" background="body_image.jpg">网页内容</body>
+
+body标记属性和取值：
+text的值为:rgb(r,g,b)[rgb函数(整数),r,g,b取值范围为0~255];
+                  rgb(r%,g%,b%)[rgb函数(百分比)，r,g,b的取值范围为0~100];
+                  #rrggbb或#rgb[十六进制数(6位或3位),如#rrggbb或#rgb,r,g,b为十六进制数，取值范围为0~F,如#3F0可转换为#33FF00];
+                  colorname[颜色的英文名称，如red,green].
+bgcolor:[值同上，规定文档的背景颜色]
+alink:[值同上，规定文档中活动链接的颜色]
+link:[值同上，规定文档中未访问链接的默认颜色]
+vlink:[值同上，规定文档中已被访问链接的背景颜色]
+background:值为URL[规定文档的背景图像]
+topmargin:值为pixel[规定文档的上边距的大小]
+leftmargin:值为pixel[规定文档的左边距的大小]
+
+代码示例：
+<!doctype html>
+<html>
+        <head>
+                <meta charset="utf-8">
+                <title>Ajax简介</title>
+        </head>
+        <body bgcolor="#CCFFFF" text="#000000">
+               <h1 align="center">Ajax简介</h1>
+               <p style="text-indent: 2em">Ajax 即“Asynchronous Javascript And XML”（异步 JavaScript 
+                和 XML），是指一种创建交互式、快速动态网页应用的网页开发技术，无
+                需重新加载整个网页的情况下，能够更新部分网页的技术。</p>
+        </body>
+</html>
