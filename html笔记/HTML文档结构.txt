@@ -1,4 +1,4 @@
-HTML初始结构：
+**HTML初始结构：
 <!DOCTYPE html>
 <html>
 	<head>
@@ -38,3 +38,36 @@ HTML初始结构：
 
 8.结尾加/
 比如：</body>、</html>
+
+**页面结构分析
+
+1.header
+标题头部区域的内容（用于页面或页面中的一块区域）
+
+2.footer
+标记脚部区域的内容（用于整个页面或页面的一块区域）
+3 section
+Web页面中的一块独立区域
+article：独立的文章内容
+aside：相关内容或应用（常用于侧边栏）
+nav:导航类辅助内容
+
+4.代码示例
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>页面结构分析</title>
+	</head>
+	<body>
+		<header>
+			<h2>网页头部</h2>
+		</header>
+		<section>
+			<h2>网页主题</h2>
+		</section>
+		<footer>
+			<h2>网页脚部</h2>
+		</footer>
+	</body>
+</html>

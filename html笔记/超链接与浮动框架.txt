@@ -1,0 +1,119 @@
+**超链接概述
+超级链接在本质上属于一个网页的一部分，它是一种允许同其他网页或站点之间进行连接的元素。
+所谓的超链接是指从一个网页指向一个目标的连接关系，这个目标可以是另一个网页，也可以是相同网页上
+的不同位置，还可以是一个图片，一个电子邮件地址，一个文件，甚至是一个应用程序。
+
+**超链接语法、路径及分类
+1.超链接语法
+1).基本语法
+<a href="url" name="" title="提示名称" target="窗口名称">超链接标题</a>
+
+2).语法说明
+超链接a标记以<a>开始，以</a>结束。其间内容为超链接标题。超链接以目的地址、链接标题、打开位置
+三部分组成。
+
+3).属性说明
+href:链接指向的目标文件
+name:规定锚的名称
+title:指向链接的提示信息
+target:指定打开的目标窗口
+
+target属性、值及其说明
+属性值                                                    说明
+_self                                               在当前框架中打开链接
+_blank                                              在一个全新的空白窗口中打开链接
+_top                                                在顶层框架中打开链接，也可以理解为在根框架中打开链接
+_parent                                             在当前框架的上一层打开链接
+_framename                                          在指定的框架或浮动框架内打开链接，框架名称可以自定义
+
+4）代码示例
+<a   href="http://www.runoob.com"target="_blank">菜鸟教程</a>
+<a   href="http://www.runoob.com"target="_self">菜鸟教程</a>
+<img src="../web02/img/a.jpg"alt="a"title="a"width="30px"height="30px">(点击图片打开网页）
+
+2.超链接路径
+
+1).绝对路径
+文件的完整路径，一般用于网站的外部链接。绝对路径有两种：一种是从盘符开始的路径，比如
+C:\windows\system32\cmd.exe，一种是从协议开始定义的URL网址，如中国教育与科研计算机网的网址
+是http://www.edu.cn.
+
+2).相对路径
+相对路径就是指由这个文件所在的路径引起的跟其它文件（或文件夹）的路径关系.
+相对位置的输入方法
+相对位置                     输入方法                                       代码示例
+同一目录                   输入要链接的文档                          <a herf="tongzhi.html">通知</a>   
+链接上一目录               先输入”../“,再输入目录名                  <a herf="../index.html">首页</a> 
+链接下一目录               先输入目录名，后加”/“                     <a herf="ks/note.html">考试通知</a>
+
+3).根路径
+根路径是从储存盘的最底层开始起，一般的网站的根目录就是域名下对应的文件夹，就如D盘是一个网站，双
+击D盘进入到D盘看到的就是网站的根目录。一般用于创建内部链接。
+比如：<a href="d:/web/news/show.html">显示信息</a>
+
+**超链接的应用
+1).创建HTTP文件下载超链接
+网站经常提供软件、文件等资料下载，下载文件的链接指向文件所在的相对路径或绝对路径，文件类型为：
+*.doc,*.pdf,*.exe,*.rar.
+基本语法
+<a href="url">链接内容</a>
+
+2).创建FTP站点访问超链接
+基本语法
+<a href="ftp://服务器IP地址或域名">链接的文字</a>
+例如：<a href="ftp://ftp.sjtu.edu.cn">2.FTP下载-上海交通大学FTP站点</a>
+
+3).创建图片超链接
+连接标题替换为图像
+<a href="URL"><img src="" alt=""></a>
+
+4).创建电子邮件超链接
+基本语法
+<a href="mailto:E-mail地址[?subject=邮件主题[&参数=参数值]]">链接内容</a>
+比如<a href="mailto:123456@qq.com">QQ微博</a>
+
+5).创建页面书签超链接
+<1>
+定义书签
+通过设置超链接a标记的name属性来定义书签
+<a name="书签名">书签标题</a>
+
+<2>定义书签链接
+<a href="#书签名">书签标题</a>              <!-- 同一页面间--> 
+<a href="URL#书签名">书签标题</a>           <!-- 不同页面间--> 
+代码示例
+                          <table align="center" border="0" width="180">
+		  <tbody>
+			<tr>
+			  <td><p>
+				<a name="menu"></a>
+				<a href="#item1">节气谣谚诗歌</a><br>
+			  </p></td>
+			</tr>
+		  </tbody>
+		</table>
+		<a name="item1">节气谣谚诗歌</a>
+		<p align="right"><a href="#menu">回到菜单</a></p>
+
+**浮动框架
+1.基本语法
+<iframe 属性名称="value" name="iframename"></iframe>
+<a href="targrt.html" target="iframename">链接标题</a>
+
+2.语法说明
+浮动框架属性
+属性                                               说明
+src                                                 设置源文件属性
+name                                                设置框架名称
+width                                               设置浮动框架窗口宽度
+height                                              设置浮动框架窗口高度
+frameborder                                         设置框架边框
+scrolling                                           设置框架滚动条
+marginwidth                                         设置框架左右边距
+marginheight                                        设置框架上下边距
+
+3.代码示例
+<!--内联框架：iframe
+src:引用页面地址 name: 框架标识名  width：宽度   height：高度-->
+	<iframe src="//player.bilibili.com/player.html?aid=498939454&bvid=BV1vK411J7jB&cid=215316094&page=1"
+	scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>(B站中的一个视频的内联)

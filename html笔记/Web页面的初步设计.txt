@@ -1,0 +1,43 @@
+**向Web页面添加文字信息
+1.基本语法
+<body>向这里添加内容</body>
+2.语法说明
+body定义文档的主体。body标记包含文本的所有内容(例如文本、超链接、图像、表格和列表等)。
+
+代码示例：
+<!doctype html>
+<html>
+        <head>
+                <meta charset="utf-8">
+                <title>建议网页</title>
+        </head>
+        <body >
+               文档的内容······
+        </body>
+</html>
+
+**标题字标记
+标题字由h1~h6共6种标记。h1标记定义最大的标题字，h6标记定义最小的标题字。
+1.基本语法
+<h1 align="left|center|right|justify">1号标题文字</h1>
+<h2 align="left|center|right|justify">2号标题文字</h2>
+<h3 align="left|center|right|justify">3号标题文字</h3>
+<h4 align="left|center|right|justify">4号标题文字</h4>
+<h5 align="left|center|right|justify">5号标题文字</h5>
+<h6 align="left|center|right|justify">6号标题文字</h6>
+2.语法说明
+h后面的数字越小标题字越大。标题字标记的align属性用来定义标题字的对齐方式，对齐方式有四种：
+left(左对齐)、center(居中对齐)、right(右对齐)、justify(两端对齐)。
+
+代码示例
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>我的网页</title>
+	</head>
+	<body>
+		<h1>前端技术</h1>
+		<p>前端则指的是直接与用户接触的网页，比如布局、特效、交互等等。</p>
+	</body>
+</html>

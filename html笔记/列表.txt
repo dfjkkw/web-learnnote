@@ -1,0 +1,234 @@
+**列表概述
+列表类型                                   标记符号                                备注
+无序列表                                   <ul>···</ul>                          常用
+有序列表                                   <ol>···</ol>                          常用
+菜单列表                                   <menu>···</menu>                      不常用
+目录列表                                   <dir>···</dir>                        不常用
+定义列表                                   <dl>···</dl>                          常用
+
+**无序列表
+无序列表ul标记是成对标记，<ul>是开始标记，</ul>是结束标记，两者之间插入若干个列表项li标记，
+完成无序列表的插入。
+
+1.基本语法
+<ul type="">
+       <li type="">项目名称</li>
+       <li type="">项目名称</li>
+       <li type="">项目名称</li>
+        ······
+</ul>
+
+2.语法说明
+type属性有3种值，分别为disc,circle,square.
+属性值                                                                说明
+disc                                                                 实心圆形●
+circle                                                               空心圆形○
+square                                                               实心正方形■
+
+3.代码示例
+<!--无序列表<ul><li></li></ul>应用范围：导航，侧边栏……-->
+                             <ul>
+			<li type="circle">Java</li>
+			<li type="disc">Python</li>
+			<li type="circle">运维</li>
+			<li type="circle">前端</li>
+			<li type="square">C/c++</li>
+		</ul>
+
+**有序列表
+有序列表ol标记是成对标记，<ol>是开始标记，</ol>是结束标记，两者之间插入若干个列表项li标记，
+完成列序列表的插入。
+
+1.基本语法
+<ol type="" start="">
+       <li type="" value="n">项目名称</li>
+       <li type="" value="n">项目名称</li>
+       <li type="" value="n">项目名称</li>
+       ······
+</ol>
+
+2.属性说明
+1）列表ol标记的属性
+type：列表项前面的编号，编号是有序的，有5种不同的类型；
+start：定义有序列表起始编号，默认值为1，设置其为非1时，列表项前编号起始位置会发生变化。
+2）列表li标记的属性
+type:只影响当前列表项前面的编号类型，后续列表项前面编号类型依旧遵循ol标记的type属性的取值。
+value: 改变当前列表项前编号的值，并影响其后所有列表项编号的值。
+
+有序列表属性、值及其说明
+属性                                    值                                      说明
+type                                    1                       定义有序列表项前面的编号为数字列表
+type                                    A                       定义有序列表项前面的编号为大写字母列表
+type                                    a                       定义有序列表项前面的编号为小写字母列表
+type                                    I                       定义有序列表项前面的编号为大写罗马字母列表
+type                                    i                       定义有序列表项前面的编号为小写罗马字母列表
+start                                  数值                     有序列表中列表项的起始数字
+
+3.代码示例：
+<!--有序列表<ol><li></li></ol>应用范围：试卷，问答……-->
+                               <ol type="1" start="1">
+			<li type="I">Java</li>
+			<li type="i" value="5">Python</li>
+			<li>运维</li>
+			<li>前端</li>
+			<li>C/c++</li>
+		</ol>
+**定义列表
+定义列表dl标记是成对标记，以<dl>为首标记，以</dl>为尾标记。定义列表由dt标记和dd标记组成。定义
+列表中每一个元素的标题使用<dt>······</dt>标记定义，后面跟随<dd>······</dd>标记，用于描述列表中元
+素的内容。
+1.基本语法
+<dl>
+       <dt>项目一</dt>
+               <dd>描述一</dd>
+               <dd>描述二</dd>
+               <dd>描述三</dd>
+       <dt>项目二</dt>
+               <dd>描述一</dd>
+               <dd>描述二</dd>
+               <dd>描述三</dd>
+       ······
+</dl>
+2.语法说明
+在网页中每一个dt标记可由一个或多个dd标记组成。这两个标记只能在dl标记中使用。定义列表的每一列表
+项前面既没有符号，也没有编号。
+
+3.代码示例
+1)
+<!---自定义列表
+                  dl:标签
+                  dt:列表名称
+                  dd:列表内容
+ 适用范围：公司网站底部-->
+                            <dl>
+		    <dt>学科</dt>
+			<dd>Java</dd>
+			<dd>Python</dd>
+			<dd>运维</dd>
+			<dd>前端</dd>
+			<dd>C/c++</dd>
+	                     <dt>位置</dt>
+			<dd>河北省</dd>
+			<dd>保定市</dd>
+			<dd>莲池区河北农业大学</dd>
+		</dl>
+
+2)成绩表
+<!--表格:table
+	行：tr
+	列：td
+	边框:border
+
+colspan跨列   rowspan跨行-->
+                <table border="1px">
+		<tr>
+		<!--colspan跨列-->
+		       <td colspan="3">学习成绩</td>
+		</tr>
+		<tr>
+		<!--rowspan跨行-->
+	                       <td rowspan="2">张三</td>
+	                       <td>语文</td>
+		       <td>100</td>
+		</tr>
+		<tr>
+		       <td>数学</td>
+		       <td>100</td>
+		</tr>
+		<tr>
+		        <td rowspan="2">李四</td>
+		        <td>语文</td>
+		        <td>100</td>
+		</tr>
+		<tr>
+		       <td>数学</td>
+		       <td>100</td>
+		</tr>
+	</table>
+3）消费项目表
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>消费项目</title>
+	</head>
+	<body>
+		<table border="1px">
+			<tr>
+				<td width="200" align="left"><strong>消费项目</strong></td>
+				<td width="100" align="right"><strong>一月</strong></td>
+				<td width="100" align="right"><strong>二月</strong></td>
+			</tr>
+			<tr>
+				<td width="200">衣服</td>
+				<td width="100" align="right">$100</td>
+				<td width="100" align="right">$100</td>
+			</tr>
+			<tr>
+				<td width="200">化妆品</td>
+				<td width="100" align="right">$100</td>
+				<td width="100" align="right">$100</td>
+			</tr>
+			<tr>
+				<td width="200">食物</td>
+				<td width="100" align="right">$100</td>
+				<td width="100" align="right">$100</td>
+			</tr>
+			<tr>
+				<td width="200"><strong>总计</strong></td>
+				<td width="100" align="right"><b>$300</b></td>
+				<td width="100" align="right"><b>$300</b></td>
+			</tr>
+		</table>
+	</body>
+</html>
+4）九宫格
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>对齐方式</title>
+	</head>
+	<body>
+		<table border="1px">
+			<tr height="50px">
+				<td width="50px" align="left" valign="top">*</td>
+				<td width="50px" align="center" valign="top">*</td>
+				<td width="50px" align="right" valign="top">*</td>
+			</tr>
+			<tr height="50px">
+				<td align="left" valign="middle">*</td>
+				<td align="center" valign="middle">*</td>
+				<td align="right" valign="middle">*</td>
+			</tr>
+			<tr height="50px">
+				<td align="left" valign="bottom">*</td>
+				<td align="center" valign="bottom">*</td>
+				<td align="right" valign="bottom">*</td>
+			</tr>
+		</table>
+	</body>
+</html>
+5）九宫格部分合并
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>单元格合并</title>
+	</head>
+	<body>
+		<table border="1px">
+			<tr height="50px">
+				<td width="100px" align="left" valign="top" colspan="2">*</td>
+				<td width="50px" align="right" valign="top" rowspan="2">*</td>
+			</tr>
+			<tr height="50px">
+				<td align="left" valign="middle" rowspan="2">*</td>
+				<td align="center" valign="middle">*</td>
+			</tr>
+			<tr height="50px">
+				<td align="center" valign="bottom" colspan="2">*</td>
+			</tr>
+		</table>
+	</body>
+</html>

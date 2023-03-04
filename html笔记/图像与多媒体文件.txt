@@ -1,0 +1,51 @@
+***图像
+1.插入图像
+1)基本语法
+<img src="URL" alt="替代文本" width="" height="" title="">
+
+2)语法说明
+img标记属性名、值及说明
+属性                                          值                                                                              说明
+alt                                           text                                                                     规定文本的替代文本
+src                                           URL                                                                      规定显示图像的URL
+name                                          text                                                                     规定图像的名称
+height                                      pixels、%                                                                  规定图像的高度
+width                                       pixels、%                                                                  设置图像的宽度
+align                              top|middle|bottom|left|center|right                                规定如何根据周围的文本来排列图像，分水平、垂直两个方向
+border                                     pixels                                                                      定义图像周围的边框
+hspace                                     pixels                                                                      定义图像左侧和右侧的空白
+vspace                                     pixels                                                                      定义图像顶部和底部的空白
+usemap                                       URL                                                                     将图像定义为客户器端图像映射
+
+2.设置图像的替代文本
+替代文本的作用：标签的 alt 属性指定了替代文本，用于在图像无法显示或者用户禁用图像显示时，代替图
+像显示在浏览器中的内容。这样即使图像无法显示，用户还是可以看到关于丢失了什么东西的一些信息。
+设置title可以在光标停在图片上时显示出title的提示信息。
+
+3.设置图像的高度和宽度
+默认情况下，图片的大小和原图的大小一样。
+
+4.设置图像的边框
+设置链接后，默认图像会显示蓝色边框；未设置时，边框颜色为黑色。
+
+5.设置图像的对齐方式
+align属性的值及说明表
+取值                                                         说明
+top                                                图像的顶端和当前行的文字顶端对齐，当前行高度相应扩大
+middle                                             图像的水平中线和当前行的文字中线对齐，当前行高度相应扩大
+bottom                                             图像的底端和当前行的文字底端对齐，当前行高度相应扩大
+left                                               图像左对齐，浮动游离于文字之外，文字环绕图像周围，文字行高度没有任何变化
+center                                             图像中线和当前行的文字中线对齐，当前行高度相应扩大
+right                                              图像右对齐，浮动游离于文字之外，文字环绕图像周围，文字行高度没有任何变化
+
+●代码示例
+<!doctype html>
+<html>
+        <head>
+                <meta charset="utf-8">
+                <title>图片的使用</title>
+        </head>
+        <body>
+               <img src=".\img\bluehills.jpg" alt="img文件夹中的bluehills.jpg" width="400px" height="300px" border="2px">
+        </body>
+</html>
