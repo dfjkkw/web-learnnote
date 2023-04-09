@@ -51,3 +51,42 @@ right                                              图像右对齐，浮动游�
 </html>
 
 **音频
+*audio标记
+
+简介：定义声音，比如音乐或其他音频流。在 HTML 4 中是非法的，但在所有浏览器中都有效。
+
+属性、值及其，描述
+属性                   值                                           描述
+autoplay	          autoplay	                             如果出现该属性，则音频在就绪后马上播放。
+
+controls	          controls	                             如果出现该属性，则向用户显示控件，比如播放按钮。
+
+loop	              loop	                                 如果出现该属性，则每当音频结束时重新开始播放。
+
+muted	              muted	                                 规定视频输出应该被静音。
+
+preload	          preload	                             如果出现该属性，则音频在页面加载时进行加载，并预备播放。
+                                                            如果使用"autoplay"，则忽略该属性。
+
+src	              url	                                 要播放的音频的 URL。
+
+*代码示例：
+<audio src="static/horse.ogg" controls="controls">
+你的浏览器不支持audio元素。
+</audio>
+
+*vedio标记
+
+简介：在 HTML 中播放视频的方法有很多种。可以使用 <embed> 标签、<object> 标签以及 <video> 标签（HTML 5中启用）。
+以下使用了4种不同的视频格式。HTML 5 <video> 元素会尝试播放以 mp4、ogg 或 webm 格式中的一种来播放视频。如果均失败，
+则回退到 <embed> 元素。
+
+*代码示例：
+<video width="320" height="240" controls>     
+	<source src="movie.mp4" type="video/mp4">       
+	<source src="movie.ogg" type="video/ogg">      
+	<source src="movie.webm" type="video/webm">      
+     <object data="movie.mp4" width="320" height="240">              
+	<embed src="movie.swf" width="320" height="240">       
+     </object> 
+</video> 

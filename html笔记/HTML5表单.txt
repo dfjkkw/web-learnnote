@@ -55,6 +55,40 @@ enctype                             multipart/form-data                         
 格式：
 <input type="" name="" value="">
 
+input标记相关属性：
+属性	                        属性值	                                                  含义说明
+name	                    用户自定义	                                              控件的名称
+
+value	                    用户自定义	                                         input控件中的默认文本值
+
+size	                     正整数	                                          input控件在页面中的显示宽度
+
+readonly	                readonly	                                           控件内容为只读（不能编辑修改）
+
+disabled	                disabled	                                         第一次加载页面时禁用该控件（显示为灰色）
+
+checked	                checked	                                             定义选择控件默认被选中的项
+
+maxlength	                正整数	                                               控件允许输入的最多字符数
+
+autocomplete	            on/off	                                           设定是否自动完成表单字段内容
+
+autofocus	                autofocus	                                       指定页面加载后是否自动获取焦点
+
+form	                 form元素的id	                                         设定字段隶属于哪一个或多个表单
+
+list	                datalist元素的id	                                       指定字段的候选数据值列表
+
+multiple	               multiple	                                            指定输入框是否可以选择多个值
+
+min、max和step	           数值	                                         规定输入框所允许的最小值、最大值和间隔
+
+pattern	                字符串	                                          验证输入的内容是否与定义的正则表达式匹配
+
+placeholder	            字符串	                                          为input类型的输入框提供用户提示
+
+required	                required	                                       规定输入框填写的内容不能为空
+
 type属性值及其作用：
 值                                                                     作用
 
