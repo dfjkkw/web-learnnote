@@ -49,3 +49,5 @@ right                                              图像右对齐，浮动游�
                <img src=".\img\bluehills.jpg" alt="img文件夹中的bluehills.jpg" width="400px" height="300px" border="2px">
         </body>
 </html>
+
+**音频
