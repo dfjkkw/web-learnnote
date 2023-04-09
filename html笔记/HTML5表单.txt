@@ -1,0 +1,157 @@
+**表单简介：
+表单在网页中主要负责数据采集功能。一个表单有三个基本组成部分： 表单标签：这里面包含了处理表单数据所用CGI程序
+的URL以及数据提交到服务器的方法。 表单域：包含了文本框、密码框、隐藏域、多行文本框、复选框、单选框、下拉选择
+框和文件上传框等。 表单按钮：包括提交按钮、复位按钮和一般按钮；用于将数据传送到服务器上的CGI脚本或者取消输入，
+还可以用表单按钮来控制其他定义了处理脚本的处理工作。
+
+**表单标签
+
+功能：
+用于申明表单，定义采集数据的范围，也就是<form>和</form>里面包含的数据将被提交到服务器或者电子邮件里
+
+语法：
+<FORM ACTION="URL" METHOD="GET|POST" ENCTYPE="MIME" TARGET="...">. . .</FORM>
+
+action=url用来指定处理提交表单的格式.
+method=get或post指明提交表单的HTTP方法.
+enctype=cdata指明用来把表单提交给服务器时(当method值为"post")的互联网媒体形式.enctype="multipart/form-data
+是设置表单的MIME编码。默认情况，这个编码格式是application/x-www-form-urlencoded，不能用于文件上传；只有使
+用了multipart/form-data，才能完整的传递文件数据，进行下面的操作.
+TARGET="..."指定提交的结果文档显示的位置.
+
+属性的值和作用
+
+属性                                   值                                                                          作用
+action                                 url                                                          它可以是一个 URL地址(提交给程式)或一个电子邮件地址. 
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+                                       get                                          get:不赞成。GET方法把名称/值对加在action的URL后面并且把新的URL送至服务
+                                                                                           器.这是往前兼容的缺省值.这个值由于国际化的原因不赞成使用.   
+mothod
+                                       post                                             POST方法在表单的主干包含名称/值对并且无需包含于action特性的URL中.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+                               application/x-www-form-urlencoded                                   窗体数据被编码为名称/值对。这是标准的编码格式
+
+enctype                             multipart/form-data                                            窗体数据被编码为一条消息，页上的每个控件对应
+                                                                                                            消息中的一个部分，上传附件用到
+
+                                       text/plain                                            窗体数据以纯文本形式进行编码，其中不含任何控件或格式字符
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+                                       _blank                                                             在一个新的、无名浏览器窗口调入指定的文档
+
+                                       _self                                                             在指向这个目标的元素的相同的框架中调入文档
+
+ target                                _parent                                                    把文档调入当前框的直接的父FRAMESET框中；这个值在当前框
+                                                                                                            没有父框时等价于_self
+
+                                       _top                                                          把文档调入原来的最顶部的浏览器窗口中(因此取消所
+                                                                                                      有其它框架),这个值等价于当前框没有你框时的_self.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**表单域
+
+简介：
+表单域包含了文本框、多行文本框、密码框、隐藏域、复选框、单选框和下拉选择框等，用于采集用户的输入或选择的数据
+
+格式：
+<input type="" name="" value="">
+
+type属性值及其作用：
+值                                                                     作用
+
+1.button　　　　　　　　　　　　　　　　                             定义可点击按钮
+
+2.checkbox　　　　　　　　  　　　　　　                                复选框
+
+3.color　　　 　　　　　　   　　　　　　                定义拾色器，定义后出现颜色调板，只支持谷歌和opera
+
+4.date　　　 　　　　　　　    　　　　　　              定义 date 控件(包括年、月、日，不包括时间)。只支持谷歌、opera、safari
+
+5.datetime　　　　　　　　 　　　　　　                    定义date和time空间,仅支持safari、opera
+
+6.datetime-local　　　　　  　　　　　　                     定义date和time空间。只支持谷歌、opera、safari
+
+7.email　　　　　　　　　　　　　　　　                   定义用于e-mail地址字段，提交时会验证。safari不支持
+
+8.file　　　　　　　　　　　　　　　　　                               上传文件
+
+9.hidden　　　　　　　　　　　　　　　                                定义隐藏字段
+
+10.image　　　　　　　　　　　　　　                                定义图像为提交按钮
+
+11.month　　　　　　　　　　　　　　                       定义month和year空间。只支持谷歌、opera、safari
+
+12.number　　　　　　　　　　　　　                     定义数字输入的字段（数量 ( 1 到 5 之间)）。只支持谷歌、opera、safari
+
+13.password　　　　　　　　　　　　                                   定义密码字段
+
+14.radio　　　　　　　　　　　　　　                                    单选项
+
+15.range　　　　　　　　　　　　　                     定义用于精确值不重要的输入数字的控件(比如 slider 控件)。您也可以设置可接受数字的限制
+
+16.reset　　　　　　　　　　　　　                                    定义重置按钮，重置为初始值
+
+17.search　　　　　　　　　　　　                                     定义搜索字段。只支持谷歌、opera
+
+18.submit　　　　　　　　　　　　                                      定义提交按钮
+
+19.tel　　　　　　　　　　　　　　                            定义输入电话号码字段，注：目前主流浏览器都不支持
+
+20.text　　　　　　　　　　　　　                                        文本
+
+21.time　　　　　　　　　　　　　                                    定义输入时间 IE和火狐不支持
+
+22.url　　　　　　　　　　　　　　                                   输入url字段，苹果浏览器不支持
+
+23.week　　　　　　　　　　　　　                                  定义week和year控件，IE和火狐不支持
+
+另：readonly 只读属性
+    required="required"  设置必填项
+    placeholder="" 设置默认值
+    accesskey="R"   设置快捷键Alt+R
+    设置多行文本框：<textarea name="" cols="" rows="">内容</textarea>
+
+**代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Html5表单增加标记综合案例</title>
+	</head>
+	<body>
+		<form action="#" method="post" enctype="multipart/form-data" name="form1">
+		<table border="1px">
+			<caption>调查问卷</caption>
+			<tr>
+				<td><label for="name">姓名：</label></td>
+				<td><input type="text" name="name" required="required" placeholder="填写姓名"/></td>
+			</tr>
+			<tr>
+				<td><label for="email">邮箱：</label></td>
+				<td><input type="email" name="email" required="required" placeholder="填写邮箱"/></td>
+			</tr>
+			<tr>
+				<td><label for="website">个人主页：</label></td>
+				<td><input type="url" name="website" required="required" placeholder="填写个人主页"/></td>
+			</tr>
+			<tr>
+				<td><label for="age">年龄：</label></td>
+				<td><input type="number" name="age" max="150" min="0" step="1" required="required" value="30" placeholder="填写年龄"/></td>
+			</tr>
+			<tr>
+				<td><label for="motion">心情：</label></td>
+				<td>坏<input type="range" name="motion" max="100" min="0" step="10" required="required" value="10"  placeholder="填写心情"/>好</td>
+			</tr>
+			<tr>
+				<td><label for="birthday">生日：</label></td>
+				<td><input type="date" name="birthday" required="required" placeholder="填写生日"/></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="reset" name="reset" value="重置(R)" accesskey="R">
+					<input type="submit" name="submit" value="提交(S)" accesskey="S">
+				</td>
+			</tr>
+		</table>
+		</form>
+	</body>
+</html>
