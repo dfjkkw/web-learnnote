@@ -1,0 +1,14 @@
+**HTML 助手（插件）
+
+*辅助应用程序（helper application）是可由浏览器启动的程序。辅助应用程序也称为插件。
+
+*插件可以通过 <object> 标签或者 <embed> 标签添加在页面中。object 和 embed 元素都通过添加对浏览器不直接支持
+的插件的支持来扩展浏览器的功能。 
+
+*大多数辅助应用程序允许对音量设置和播放功能（比如后退、暂停、停止和播放）的手工（或程序的）控制。
+
+代码示例：
+<object width="400" height="400" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"  codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0">
+        <param name="SRC" value="bookmark.swf">
+        <embed src="static/bookmark.swf" width="400" height="400"></embed>
+</object>
