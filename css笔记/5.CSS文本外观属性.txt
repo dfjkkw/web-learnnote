@@ -93,7 +93,7 @@ text-indent属性用于设置首行文本的缩进，其属性值可为不同单
 3.nowrap：空格空行无效，强制文本不能换行，除非遇到换行标记<br />。内容超出元素的边界也不换行，若超出浏览器页面则会自动增加滚动条。
 
 代码示例：
-
+html文件：
 <!DOCTYPE html>
 <html>
 	<head>
@@ -112,3 +112,15 @@ text-indent属性用于设置首行文本的缩进，其属性值可为不同单
 		</p>
 	</body>
 </html>
+css文件：
+@charset "utf-8";
+/* CSS Document */
+p{
+	font-size:16px;         /*设置段落文本的字号*/
+	font-family:"微软雅黑";  /*设置段落文本的字体*/
+	line-height:28px;       /*设置段落文本的行高*/
+	text-indent:2em;         /*设置段落文本首行缩进*/
+}  
+.blue{ color:#33F;}         /*特殊的蓝色文本*/
+.red{color:#F00;}           /*特殊的红色文本*/
+.money{ font-size:26px;}    /*18000的文本大小*/
