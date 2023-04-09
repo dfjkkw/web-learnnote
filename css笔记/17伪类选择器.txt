@@ -1,0 +1,128 @@
+**伪类选择器
+
+基本语法 
+selector:pseudo-class {property:value;} 。
+
+伪类选择符	                                 示例	                                                             描述
+:link	                                    a:link	                                                     选择所有未访问的链接
+:visited	                               a:visited	                                                 选择所有访问过的链接
+:hover	                                    a:hover	                                                    选择鼠标悬停链接上的状态
+:active	                               a:active	                                                    选择鼠标单击链接时的状态
+:root	                                     root		                                             选择文档的根元素，通常是返回html
+:first-child	                        p:first-child	                                              匹配属于任意元素的第一个子元素的<p>元素
+:last-child		                    p:last-child	                                             选择所有p元素的最后一个子元素
+:only-child	                        p:only-child	                                             选择所有仅有一个子元素的p元素
+:only-of-type	                        p:only-of-type	                                               选择所有仅有一个子元素为p的元素
+:nth-child(n)	                        p:nth-child(2)	                                               选择所有p元素的父元素的第二个子元素
+:nth-last-child(n)	                    p:nth-last-child(2)	                                           选择所有p元素倒数的第二个子元素
+:nth-of-type(n)	                    p:nth-of-type(2)	                                           选择所有p元素第二个为p的子元素
+:nth-last-of-type(n)	                p:nth-last-of-type(2)	                                      选择所有p元素倒数的第二个为p的子元素
+:focus	                                 input:focus	                                                 选择获得焦点状态下的元素
+:enabled(:disabled)	                input:enabled(:disabled)	                                     选择启用（禁用）状态的表单元素
+:checked	                            input:checked                                                     被选中的单选按钮或复选框
+:valid(:invalid)	                   input:valid(:invalid)	                                   验证输入数据，匹配有效（无效）的input元素
+:not	                               input:not(.radio)	                                       选择除去应用了radio类之外的所有input元素
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>伪类选择器</title>
+		<style type="text/css">
+			h3{
+				text-align:center;
+				color:#900;
+			}
+			table{
+				border:10px solid #E7E7E7;
+			}
+			tr:first-child{
+				background:#E7E7E7;
+				font-weight:bold;
+			}
+			td{
+				height:50px;
+				width:160px;
+				text-align:center;
+				vertical-align:middle;
+				border-bottom:#E7E7E7 1px solid;
+				border-right:#E7E7E7 1px solid;
+			}
+			td:last-of-type{
+				border-right:0px;
+			}
+			tr:nth-child(2n){
+				background:#CFCFCF;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>鞋子尺码对照单</h3>
+		<table align="center" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>脚长（单位：cm）</td>
+				<td>尺码（单位：cm）</td>
+				<td>欧码</td>
+				<td>英码</td>
+				<td>美码</td>
+			</tr>
+			<tr>
+				<td>23.7</td>
+				<td>24</td>
+				<td>38.5</td>
+				<td>5.5</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td>24.1</td>
+				<td>24.5</td>
+				<td>39</td>
+				<td>6</td>
+				<td>6.5</td>
+			</tr>
+			<tr>
+				<td>24.5</td>
+				<td>25</td>
+				<td>40</td>
+				<td>6</td>
+				<td>7</td>
+			</tr>
+			<tr>
+				<td>25</td>
+				<td>25.5</td>
+				<td>40.5</td>
+				<td>6.5</td>
+				<td>7.5</td>
+			</tr>
+			<tr>
+				<td>25.4</td>
+				<td>26</td>
+				<td>41</td>
+				<td>7</td>
+				<td>8</td>
+			</tr>
+			<tr>
+				<td>25.8</td>
+				<td>26.5</td>
+				<td>42</td>
+				<td>7.5</td>
+				<td>8.5</td>
+			</tr>
+			<tr>
+				<td>26.2</td>
+				<td>27</td>
+				<td>42.5</td>
+				<td>8</td>
+				<td>9</td>
+			</tr>
+			<tr>
+				<td>26.7</td>
+				<td>27.5</td>
+				<td>43</td>
+				<td>8.5</td>
+				<td>9.5</td>
+			</tr>
+		</table>
+	</body>
+</html>

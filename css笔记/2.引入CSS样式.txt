@@ -1,0 +1,96 @@
+**行内式
+
+定义：
+行内式也称为内联样式，是通过标记的style属性来设置元素的样式。
+
+基本格式:
+<标记名 style="属性1:属性值1; 属性2:属性值2; 属性3:属性值3;"> 内容 </标记名>
+注意：任何HTML标记都拥有style属性，用来设置行内式。其中属性和值的书写规范与CSS样式规则相同，行内式只对其所在的标记及嵌套在其中的子标记起作用。
+
+代码示例：
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>行内式</title>
+</head>
+<body>
+	<h2 style="font-size:20px; color:red;">使用CSS行内式修饰二级标题的字体大小和颜色</h2>
+</body>
+</html>
+
+**内嵌式
+
+定义：
+内嵌式是将CSS代码集中写在HTML文档的<head>头部标记中，并且用<style>标记定义。
+
+基本格式：
+<style type="text/css">
+	选择器 {属性1:属性值1; 属性2:属性值2; 属性3:属性值3;}
+</style>
+注意：<style>标记一般位于<head>标记中<title>标记之后，也可以把它放在HTML文档的任何地方。
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>内嵌式</title>
+		<style type="text/css">
+			h2{ text-align:center;}/*定义标题标记居中对齐*/
+			p{ font-size:16px; color:red; text-decoration:underline;} /*定义段落标记的样式*/
+		</style>
+	</head>
+	<body>
+		<h2>内嵌式CSS样式</h2>
+		<p>使用style标记可定义内嵌式CSS样式表，style标记一般位于head头部标记中，title标记之后。</p>
+	</body>
+</html>
+
+**链入式
+
+定义：
+链入式是将所有的样式放在一个或多个以.css为扩展名的外部样式表文件中，通过<link />标记将外部样式表文件链接到HTML文档中。
+
+基本格式：
+<head>
+	<link href="url"   type="text/css"   rel="stylesheet" />
+</head>
+
+属性、值及其描述：
+属性	                                      值	                                                                          描述
+
+href	                                   URL	                                                                   规定被链接文档的位置。
+-------------------------------------------------------------------------------------------------------------------------------------
+                       alternate           author                  help
+                       icon                licence	                next
+rel                    pingback            prefetch                prev                                    规定当前文档与被链接文档之间的关系。  
+                       search	            sidebar               stylesheet
+                       tag
+--------------------------------------------------------------------------------------------------------------------------------------
+type	                                MIME_type	                                                          规定被链接文档的 MIME 类型。
+--------------------------------------------------------------------------------------------------------------------------------------
+
+代码示例：
+先创建一个3.css文件并在其中输入：
+h2 { 
+text-align:center;
+}
+p {
+font-size:16px; 
+color:red; 
+text-decoration:underline;
+}
+再创建一个html文件将其与3.css文件串联起来
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>链入式</title>
+		<link href="css/3.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<h2>链入式CSS样式表</h2>
+		<p>通过link 标记可以将拓展名为.css的外部样式表文件链接到HTML文档中</p>
+	</body>
+</html>

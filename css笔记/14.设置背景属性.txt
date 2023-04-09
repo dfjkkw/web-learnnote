@@ -1,0 +1,173 @@
+**背景颜色
+
+1.在CSS中，网页元素的背景颜色使用background-color属性来设置，其属性值与文本颜色的取值一样，可使用预定义的颜色值、十六进制#RRGGBB或RGB代码rgb(r,g,b)。
+background-color的默认值为transparent，即背景透明，这时子元素会显示其父元素的背景。
+
+代码示例：
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>背景颜色</title>
+		<style type="text/css">
+			body{ background-color: #CCC;}      /*设置网页的背景颜色*/
+			h2{
+				font-family:"微软雅黑"; 
+				color:#FFF;
+				background-color:#F00;          /*设置标题的背景颜色*/
+			}
+		</style>
+	</head>
+	<body>
+		<h2>学不会，怎么办？</h2>
+		<p>多看帖子、勤写代码，学计算机，高薪就业无忧！详情请见传www.hebau.edu.cn。</p>
+	</body>
+</html>
+
+2.背景不仅可以设置为某种颜色，在CSS中还可以将图像作为网页元素的背景，通过background-image属性实现。
+
+例如：
+body{
+	background-color:#CCC; /*设置网页的背景颜色*/
+	background-image:url(img/jianbian.jpg); /*设置网页的背景图像*/
+} 
+
+代码示例：
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>背景颜色</title>
+		<style type="text/css">
+			body{ 
+				background-color: #CCC;
+				background-image:url(img/jianbian.jpg);    
+			}      /*设置网页的背景颜色和图片*/
+			h2{
+				font-family:"微软雅黑"; 
+				color:#FFF;
+				background-color:#F00;          /*设置标题的背景颜色*/
+			}
+		</style>
+	</head>
+	<body>
+		<h2>学不会，怎么办？</h2>
+		<p>多看帖子、勤写代码，学计算机，高薪就业无忧！详情请见传www.hebau.edu.cn。</p>
+	</body>
+</html>
+
+**设置背景图片平铺
+
+默认情况下，背景图像会自动向水平和竖直两个方向平铺，如果不希望背景图像平铺，或者只沿着一个方向平铺，可以通过background-repeat属性来控制，该属性的取值如下：
+1.repeat：沿水平和竖直两个方向平铺（默认值）
+2.no-repeat：不平铺（图像位于元素的左上角，只显示一次）
+3.repeat-x：只沿水平方向平铺
+4.repeat-y：只沿竖直方向平铺
+
+代码示例：
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>平铺</title>
+		<style type="text/css">
+			body{
+				background-image:url(img/wdjl.jpg);     /*设置网页的背景图像*/
+				background-repeat:no-repeat;                 /*设置背景图像不平铺*/
+			}
+		</style>
+	</head>
+	<body>
+		<h2>主要学习哪些内容？</h2>
+		<p>主要学习的课程：Html 、 CSS 、 Javascript 。 </p>
+	</body>
+</html>
+
+**背景图像的位置
+
+background-position属性的取值有多种，具体如下：
+（1）使用不同单位（最常用的是像素px）的数值：直接设置图像左上角在元素中的坐标。
+例如
+background-position:20px 20px;
+（2）使用预定义的关键字：指定背景图像在元素中的对齐方式。
+水平方向值：left、center、right。
+垂直方向值：top、center、bottom。
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>平铺</title>
+		<style type="text/css">
+			body{
+				background-image:url(img/wdjl.jpg);     /*设置网页的背景图像*/
+				background-repeat:no-repeat;                 /*设置背景图像不平铺*/
+				background-position: center bottom;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>主要学习哪些内容？</h2>
+		<p style="height:500px">主要学习的课程：Html 、 CSS 、 Javascript 。 </p>
+	</body>
+</html>
+
+（3）使用百分比：按背景图像和元素的指定点对齐。
+0% 0%      表示图像左上角与元素的左上角对齐。
+50% 50%    表示图像50% 50%中心点与元素50% 50%的中心点对齐。
+20% 30%    表示图像20% 30%的点与元素20% 30%的点对齐。
+100% 100%  表示图像右下角与元素的右下角对齐，而不是图像充满元素。
+如果只有一个百分数，将作为水平值，垂直值则默认为50%。
+
+**设置背景图像固定
+
+如果希望背景图像固定在屏幕上，不随着页面元素滚动，可以使用background-attachment属性来设置，其属性值如下：
+1.scroll：图像随页面元素一起滚动（默认值）。
+2.fixed：图像固定在屏幕上，不随页面元素滚动。
+
+**综合设置元素的背景
+
+同边框属性一样，在CSS中背景属性也是一个复合属性，可以将背景相关的样式都综合定义在一个复合属性background中。
+
+语法格式：
+background:背景色   url(“图像”)   平铺   定位    固定;
+在上面的语法格式中，各个样式顺序任意，中间用空格隔开，不需要的样式可以省略。
+
+代码示例：
+html文件：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>综合实例</title>
+		<link rel="stylesheet" href="css/24.css" type="text/css" />
+	</head>
+	<body>
+		<div class="outer">
+		    <div class="inner"></div>
+		</div>
+	</body>
+</html>
+
+css文件：
+@charset "utf-8";
+/* CSS Document */
+/*将页面中所有元素的内外边距设置为0*/
+*{margin:0; padding:0;}
+/*设置外面盒子的样式*/
+.outer{
+	width:900px;
+	height:344px;
+	margin:50px auto;
+	background:url(../img/bg.png) repeat-x;
+}
+/*设置里面盒子的样式*/
+.inner{
+	width:900px;
+	height:344px;
+	background:url(../img/coffee.png) no-repeat center 30px;
+}

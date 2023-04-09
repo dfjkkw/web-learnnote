@@ -1,0 +1,93 @@
+**position属性：
+
+属性规定元素的定位类型。这个属性定义建立元素布局所用的定位机制。任何元素都可以定位，不过绝对或固定元素会生成一个块级框，而不论该元素本身是什么类型。相对
+定位元素会相对于它在正常流中的默认位置偏移。
+
+值	                                                             描述
+absolute	                        生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。
+                                   元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。
+fixed	                                        生成绝对定位的元素，相对于浏览器窗口进行定位。
+                                   元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。
+relative	                                      生成相对定位的元素，相对于其正常位置进行定位。
+                                         因此，"left:20" 会向元素的 LEFT 位置添加 20 像素。
+static	                         默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。
+inherit	                                          规定应该从父元素继承 position 属性的值。
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>定位</title>
+		<style type="text/css">
+		h2.pos_left
+		{
+			position:relative;
+			left:-20px
+		}
+		h2.pos_right
+		{
+			position:relative;
+			left:20px
+		}
+		h2.pos_abs
+		{
+			position:absolute;
+			left:100px;
+			top:150px
+		}
+		p.one
+		{
+			position:fixed;
+			left:100px;
+			top:200px;
+		}
+		p.two
+		{
+			position:fixed;
+			top:200px;
+			right:100px;
+		}
+		</style>
+	</head>
+	<body>
+		<h2>这是位于正常位置的标题</h2>
+		<h2 class="pos_left">这个标题相对于其正常位置向左移动</h2>
+		<h2 class="pos_right">这个标题相对于其正常位置向右移动</h2>
+		<h2 class="pos_abs">这是带有绝对定位的标题</h2>
+		<p class="one">左侧文本。</p>
+		<p class="two">右侧文本。</p>
+	</body>
+</html>
+
+**z-index属性：
+设置元素的堆叠顺序。拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面。该属性设置一个定位元素沿 z 轴的位置，z 轴定义为垂直延伸到显示区的轴。
+如果为正数，则离用户更近，为负数则表示离用户更远。
+
+值	                                               描述
+auto	                                     默认。堆叠顺序与父元素相等。
+number	                                     设置元素的堆叠顺序。
+inherit	                               规定应该从父元素继承 z-index 属性的值。
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>z-index</title>
+		<style type="text/css">
+			img.x
+			{
+				position:absolute;
+				left:0px;
+				top:0px;
+				z-index:-1
+			}
+		</style>
+	</head>
+	<body>
+		<h1>这是一个标题</h1>
+		<img class="x" src="img/eg_mouse.jpg" /> 
+		<p>默认的 z-index 是 0。Z-index -1 拥有更低的优先级。</p>
+	</body>
+</html>

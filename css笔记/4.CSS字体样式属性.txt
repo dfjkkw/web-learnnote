@@ -1,0 +1,88 @@
+**font-size:字号大小:
+
+简介：
+font-size属性用于设置字号，该属性的值可以使用相对长度单位，也可以使用绝对长度单位。
+
+长度单位：
+相对长度单位	                      说明
+em	                  相对于当前对象内文本的字体尺寸
+px	                        像素，最常用，推荐使用
+
+绝对长度单位	                      说明
+in	                               英寸
+cm	                               厘米
+mm	                               毫米
+pt	                                点
+
+**font-family:字体
+
+简介：
+font-family属性用于设置字体。网页中常用的字体有宋体、微软雅黑、黑体等。
+可以同时指定多个字体，中间以逗号隔开，表示如果浏览器不支持第一个字体，则会尝试下一个，直到找到合适的字体。
+例如：
+body{font-family:"华文彩云","宋体","黑体";}
+
+使用font-family设置字体时的注意事项：
+1.各种字体之间必须使用英文状态下的逗号隔开。
+2.中文字体需要加英文状态下的引号，英文字体一般不需要加引号。当需要设置英文字体时，英文字体名必须位于中文字体名之前。
+3.如果字体名中包含空格、#、$等符号，则该字体必须加英文状态下的单引号或双引号，例如font-family: "Times New Roman";。
+4.尽量使用系统默认字体，保证在任何用户的浏览器中都能正确显示。
+
+**font-weight:字体粗细
+
+简介：
+font-weight属性用于定义字体的粗细。
+
+font-weight属性的值及其描述
+值	                                                                         描述
+normal	                                                             默认值。定义标准的字符。
+bold	                                                                    定义粗体字符。
+bolder	                                                                    定义更粗的字符。
+lighter	                                                                定义更细的字符。
+100~900（100的整数倍）	                         定义由细到粗的字符。其中400等同于normal，700等同于bold，值越大字体越粗。
+
+**font-variant:变体
+
+简介：
+font-variant属性用于设置变体（字体变化），一般用于定义小型大写字母，仅对英文字符有效。
+
+其可用属性值如下：
+normal：默认值，浏览器会显示标准的字体。
+small-caps：浏览器会显示小型大写的字体，即所有的小写字母均会转换为大写。但是所有使用小型大写字体的字母与其余文本相比，其字体尺寸更小。
+
+**font-style:字体风格
+简介：
+font-style属性用于定义字体风格，如设置斜体、倾斜或正常字体
+
+其可用属性值如下：
+normal：默认值，浏览器会显示标准的字体样式。
+italic：浏览器会显示斜体的字体样式。
+oblique：浏览器会显示倾斜的字体样式。
+其中italic和oblique都用于定义斜体，两者在显示效果上并没有本质区别，但实际工作中常使用italic。
+
+**font:综合设置字体样式
+
+简介：
+font属性用于对字体样式进行综合设置normal：默认值，浏览器会显示标准的字体样式。
+
+语法格式：
+选择器{font: font-style font-variant font-weight font-size/line-height font-family;}
+使用font属性时，必须按上面语法格式中的顺序书写，各个属性以空格隔开。其中line-height指的是行高。
+例如：p{ font:italic small-caps bold 30px/40px Arial,"宋体" ;}
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>font属性</title>
+		<style type="text/css">
+			.one{ font:italic 18px/30px "隶书";}
+			.two{ font:italic 18px/30px;}
+		</style>
+	</head>
+	<body>
+		<p class="one">段落1：使用font属性综合设置段落文本的字体风格，字号，行高和字体。</p>
+		<p class="two">段落2：使用font属性综合设置段落文本的字体风格、字号和行高。由于省略了字体属性font-family，这时font属性不起作用。</p>
+	</body>
+</html>

@@ -1,0 +1,34 @@
+**内边距属性
+
+简介：
+为了调整内容在盒子中的显示位置，常常需要给元素设置内边距，所谓内边距指的是元素内容与边框之间的距离，也常常称为内填充。
+
+在CSS中padding属性用于设置内边距，同边框属性border一样，padding也是复合属性：
+1.padding-top:上内边距;
+2.padding-right:右内边距;
+3.padding-bottom:下内边距;
+4.padding-left:左内边距;
+5.padding:上内边距 [右内边距 下内边距 左内边距];
+
+代码示例：
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>内边距</title>
+		<style type="text/css">
+			.border{ border:5px solid #ccc;}     /*为图像和段落设置边框*/
+			img{
+				padding:80px;                       /*图像4个方向内边距相同*/
+				padding-bottom:0;                  /*单独设置下边距*/
+				/*上面两行代码等价于padding:80px 80px 0;*/
+			}        
+			p{ padding:5%;}                         /*段落内边距为父元素宽度的5%*/
+		</style>
+	</head>
+	<body>
+		<img class="border" src="img/design.jpg" alt="平面设计" />
+		<p class="border">段落内边距为父元素宽度的5%。</p>
+	</body>
+</html>

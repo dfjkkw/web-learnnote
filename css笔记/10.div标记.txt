@@ -1,0 +1,41 @@
+**div标记
+
+简介：
+div是英文division的缩写，意为“分割、区域”。<div>标记简单而言就是一个区块容器标记，可以将网页分割为独立的、不同的部分，以实现网页的规划和布局。<div>与</div>之间相当于一个容器，可以容纳段落、标题、图像等各种网页元素，也就是说大多数HTML标记都可以嵌套在<div>标记中，<div>中还可以嵌套多层<div>。
+<div>标记非常强大，通过与id、class等属性配合，然后使用CSS设置样式，来替代大多数的文本标记。
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>div标记</title>
+		<style type="text/css">
+			.one{
+				width:450px;               /*设置宽度*/
+				height:30px;               /*设置高度*/
+				line-height:30px;          /*设置行高*/
+				background:#FCC;           /*设置背景颜色*/
+				font-size:18px;            /*设置字体大小*/
+				font-weight:bold;          /*设置字体加粗*/
+				text-align:center;         /*设置文本水平居中对齐*/
+			}
+			.two{
+				width:450px;               /*设置宽度*/
+				height:100px;              /*设置高度*/
+				background:#0F0;           /*设置背景颜色*/
+				font-size:14px;            /*设置字体大小*/
+				text-indent:2em;           /*设置首行文本缩进*/
+			}
+		</style>
+	</head>
+	<body>
+		<div class="one">
+			用div标记设置的标题文本
+		</div>
+		<div class="two">
+			<p>div标记中嵌套的p标记中的文本</p>
+		</div>
+	</body>
+</html>
+

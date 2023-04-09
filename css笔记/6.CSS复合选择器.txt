@@ -1,0 +1,82 @@
+**为何使用CSS复合选择器？
+书写CSS样式表时，可以使用CSS基础选择器选中目标元素。但是在实际网站开发中，一个网页可能包含成千上万的元素，如果仅使用CSS基础选择器，不可能良好的
+组织页面样式。为此CSS提供了几种复合选择器，实现了更强、更方便的选择功能。
+
+**标签指定式选择器
+
+简介：
+标签指定式选择器又称交集选择器，由两个选择器构成，其中第一个为标记选择器，第二个为class选择器或id选择器，两个选择器之间不能有空格。
+
+举例:
+h3.special
+p#one
+
+代码示例：
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>标签指定式选择器</title>
+		<style type="text/css">
+			p{ color:blue;}
+			.special{ color:green;}
+			p.special{ color:red;}    /*标签指定式选择器*/   
+		</style>
+	</head>
+	<body>
+		<p>普通段落文本（蓝色）</p>
+		<p class="special">指定了.special类的段落文本（红色）</p>
+		<h3 class="special">指定了.special类的标题文本（绿色）</h3>
+	</body>
+</html>
+
+**后代选择器
+
+简介：
+后代选择器用来选择元素或元素组的后代，其写法就是把外层标记写在前面，内层标记写在后面，中间用空格分隔。当标记发生嵌套时，内层标记就成为外层标记的后代。
+
+代码示例：
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>后代选择器</title>
+		<style type="text/css">
+			p strong{ color:red;}     /*后代选择器*/
+			strong{ color:blue;}
+		</style>
+	</head>
+	<body>
+		<p>段落文本<strong>嵌套在段落中，使用strong标记定义的文本（红色）。</strong></p>
+		<strong>嵌套之外由strong标记定义的文本（蓝色）。</strong>
+	</body>
+</html>
+
+**并集选择器
+
+简介：
+并集选择器是各个选择器通过逗号连接而成的，任何形式的选择器（包括标记选择器、class类选择器、id选择器等），都可以作为并集选择器的
+一部分。如果某些选择器定义的样式完全相同，或部分相同，就可以利用并集选择器为他们定义相同的CSS样式。
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>并集选择器</title>
+		<style type="text/css">
+		h2,h3,p{ color:red; font-size:14px;}              /*不同标记组成的并集选择器*/
+		h3,.special,#one{ text-decoration:underline;}   /*标记、类、id组成的的并集选择器*/
+		</style>
+	</head>
+	<body>
+		<h2>二级标题文本。</h2>
+		<h3>三级标题文本,加下划线。</h2>
+		<p class="special">段落文本1，加下划线。</p>
+		<p>段落文本2，普通文本。</p>
+		<p id="one">段落文本3，加下划线。</p>
+	</body>
+</html>
+

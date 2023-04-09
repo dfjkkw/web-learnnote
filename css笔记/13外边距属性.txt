@@ -1,0 +1,36 @@
+**外边距属性
+
+定义：
+网页是由多个盒子排列而成的，要想拉开盒子与盒子之间的距离，合理地布局网页，就需要为盒子设置外边距，所谓外边距指的是元素边框与相邻元素之间的距离。
+
+在CSS中margin属性用于设置外边距，它是一个复合属性，与内边距padding的用法类似：
+1.margin-top:上外边距;
+2.margin-right:右外边距;
+3.margin-bottom:下外边距;
+4.margin-left:左外边距;
+5.margin:上外边距 [右外边距 下外边距 左外边距]; 
+
+代码示例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>外边距</title>
+		<style type="text/css">
+			img{
+				border:5px solid red;
+				float:left;                /*设置图像左浮动*/
+				margin-right:50px;         /*设置图像的右外边距*/
+				margin-bottom:30px;        /*设置图像的左外边距*/
+				/*上面两行代码等价于margin:0 50px 30px 0;*/
+			}
+			p{ text-indent:2em;}          
+		</style>
+	</head>
+	<body>
+		<img src="img/design.jpg" alt="平面设计" />
+		<p>该课程将学习互联网最前沿的html5与css3技术，实现企业网站的响应式web设计。</p>
+		<p>其他增值课程：电子商务视觉营销设计、淘宝店铺装修设计、多媒体终端界面设计。</p>
+		<p>详情请见课程首页：http://www.hebau.edu.cn</p>
+	</body>
+</html>

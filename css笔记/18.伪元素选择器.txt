@@ -1,0 +1,61 @@
+**伪元素
+
+不存在在DOM文档中，是虚拟的元素，是创建新元素。代表某个元素的子元素，这个子元素虽然在逻辑上存在，但却并不实际存在于文档树中。
+
+基本语法 :
+selector:pseudo-element {property:value;} 
+
+伪元素选择符	                           示例	                                                描述
+:first-letter	                    p:first-letter	                                     选择p段落的首字母
+:first-line	                    p:first-line	                                      选择p元素的首行
+:before	                        h1:before	                      在元素h1的内容前面插入新内容，必须配合content属性指定要插入的具体内容
+:after	                            h2:after	                         在元素h1的内容后面插入新内容，必须配合content属性指定要插入的具体内容
+
+代码示例：
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>伪元素</title>
+		<style type="text/css">
+			p
+			{
+				font-size:16px;
+				line-height: 30px;
+			}
+			p:first-letter 
+			{
+				color: #ff0000;
+				font-size:20px;
+				margin-left: 30px;
+			}
+			p:first-line
+			{
+				color:#0000ff;
+				font-variant:small-caps;
+			}
+			p:before
+			{	content: "";
+				background:url(img/round.png) no-repeat;
+				background-size: 30px 30px;
+				width:30px;
+				height:30px;
+				position: absolute;
+			}
+			p:after
+			{
+				content: "编辑：陈晨"
+			}
+		</style>
+	</head>
+	<body>
+		<p>河北农业大学（Hebei Agricultural University）位于河北省保定市，是河北省人民政府与教育部、农业农村部、国家林业和草原局分别共建的省属重点骨干大学，学校入选第一批“卓越农林人才教育培养计划”和“卓越工程师教育培养计划”。</p>
+		<p>河北农业大学的前身是光绪二十八年（1902年）创立的直隶农务学堂；1912年改为直隶公立农业专门学校；1921年直隶公立农业专门学校、医务学堂，还有法律、法政、高等师范等学堂合并，组成河北大学；1931年河北大学解散，河北省立农学院独立办学；1958年河北农学院更名为河北农业大学；1995年与原河北林学院合并组建为新的河北农业大学。 </p>
+	</body>
+</html>
+
+**伪元素和伪类的区别：
+伪类：用于向某些选择器添加特殊的效果
+伪元素：用于将特殊的效果添加到某些选择器
+其实根本意思就是对那些不能通过class、id等选择元素的补充。

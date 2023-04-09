@@ -1,0 +1,78 @@
+**CSS优先级
+
+*定义CSS样式时，经常出现两个或更多规则应用在同一元素上，这时就会出现优先级的问题。
+
+例如：css为：
+p{ color:red;}              /*标记样式*/
+.blue{ color:green;}       /*class样式*/
+#header{ color:blue;}      /*id样式*/
+Html为：
+<p id="header" class="blue">
+	帮帮我，我到底显示什么颜色？
+</p>
+标记选择器具有权重1，类选择器具有权重10，id选择器具有权重100。
+因此文本显示为蓝色。
+
+*继承样式的权重为0。即在嵌套结构中，不管父元素样式的权重多大，被子元素继承时，它的权重都为0。
+
+例如：css为：
+strong{ color:red;}
+.blue{ color:green;}  
+#header{ color:green;}
+Html为：
+<p id="header" class="blue">
+	<strong>继承样式不如自己定义</strong>
+</p>
+虽然#header具有权重100，但被strong继承时权重为0，而strong选择器的权重虽然仅为1，但它大于继承样式的权重，所以页面中的文本显示为红色。
+
+*行内样式优先。应用style属性的元素，其行内样式的权重非常高，可以理解为远大于100。总之，它拥有比上面提到的选择器都大的优先级。 
+
+权重相同时，CSS遵循就近原则。也就是说靠近元素的样式具有最大的优先级，或者说排在最后的样式优先级最大。
+CSS定义了一个!important命令，该命令被赋予最大的优先级。也就是说不管权重如何以及样式位置的远近，!important都具有最大优先级。
+
+CSS优先级：
+行内样式 > 内嵌样式 > 链接样式
+行内样式  > id选择器 > 类选择器、伪类选择器 > 标记选择器、伪元素选择器 > 通配符 后代选择器、子选择器、相邻选择器、继承样式
+1000          100             10                      1                               0
+
+代码示例：
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>搜索页面</title>
+		<style type="text/css">
+			body{font-family:'微软雅黑'; font-size:14px; color:#333;}   /* 全局控制*/
+			em{ font-style:normal;}                                    /* 整体控制页面中的em*/  
+			.header{                /* 控制标题 */
+				font-size:18px;
+				color:#D52D2D;
+				text-decoration:underline;
+				font-weight:normal;
+			}
+			.header em{          /* 控制标题中的蓝色文本 */
+				color:#2525D3;
+				text-decoration:underline;
+			}
+			.red{color:#D52D2D;}
+			.green{color:#167A16;}
+			.gray{
+				color:#595959;
+				text-decoration:underline;
+			}
+		</style>
+	</head>
+	<body>
+		<h2 class="header">
+			什么是CSS<em>?—CSS教程</em>
+		</h2>
+		<p>
+		    猴子提示: 可以通过简单的更改<em class="red">CSS</em>文件,改变网页的整体表现形式,可以减少我们的工作量,所以她是每一个网页设计人员的必修课.知道什么是<em class="red">CSS</em>了,现在就开始学习<em class="red">CSS</em>吧 ...
+		</p>
+		<p>
+			<em class="green">www.dreamdu.com/css/wh...</em>-<em class="gray">百度快照</em>-<em class="gray">85%好评</em>
+		</p>
+	</body>
+</html>
+
