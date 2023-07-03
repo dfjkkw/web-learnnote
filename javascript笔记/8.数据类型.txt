@@ -1,0 +1,66 @@
+**数据类型
+
+##（1）数值型
+数字（number）是最基本的数据类型，不区分整型数值和浮点型数值。在JavaScript中，所有数字都是数值型。
+
+JavaScript支持的数值直接量主要包括整型数据、十六进制和八进制、浮点型数据。
+
+----整型数据：123
+----十六进制：0x5C
+----八进制：023
+----浮点型数据：3.14（即小数）
+
+##（2）字符串型
+字符串(string)是由Unicode字符、数字、标点符号等组成的序列，它是JavaScript用来表示文本的数据类型。程序中的字符串型数据包含在单引号或双引号
+中，由单引号定界的字符串中可以包含双引号，由双引号定界的字符串中也可以包含单引号。
+
+##（3）布尔型
+布尔型数据类型只有两个值，分别由“true”和“false”表示。在Javascript程序中，布尔值通常用来比较所得的结果。
+
+n==1
+这行代码测试了变量n的值是否和数值1相等。如果相等，比较的结果就是布尔值true，否则结果就是false。
+
+##（4）特殊数据类型
+
+----转义字符
+以反斜杠开头的，不可显示的特殊字符通常称之为控制字符，也被称为转义字符。在字符串中添加不可显示的特殊字符，可以避免引号匹配引起的混乱。
+
+转义字符	              描述	                        转义字符	           描述
+\b	                     退格	                              \v	          跳格（Tab、水平）
+\n	                     回车换行	                        \r	                换行
+\t	                     Tab符号	                          \\	              反斜杠
+\f	                     换页	                             \ooo	        八进制整数，范围000~777
+\’	                     单引号	                        \xHH	       十六进制整数，范围00~FF
+\’’	                 双引号	                        \uhhhh	       十六进制编码的Unicode字符
+
+----未定义值
+未定义类型的变量是undefined，表示变量还没有赋值
+赋予一个不存在的属性值（如 var a=String.notExitProperty;）
+
+----JavaScript中有一种特殊类型的数字常量NaN，即“非数字”。当程序由于某种原因计算错误后，将产生一个没有意义的数字，此时JavaScript返回的数值就是NaN。
+
+----空值(null)
+JavaScript中的关键字null是一个特殊的值，它表示空值，用于定义空的或不存在的引用。在程序中，如果引用一个没有定义的变量，则返回一个null值。
+注意：null不等于空字符串（””）和0。
+
+----null与undefined的区别:
+null表示一个变量被赋予了一个空值
+undefined则表示该变量尚未被赋值
+
+##特殊数据类型实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			console.log(a);   //Uncaught ReferenceError: a is not defined（报错）
+			console.log(window.a);  //undefined
+			console.log(1/0);  //Infinity
+			console.log(-1/0);  //-Infinity
+			console.log("abc"/100);  //NaN
+		</script>
+	</body>
+</html>
