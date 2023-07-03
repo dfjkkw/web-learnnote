@@ -1,0 +1,104 @@
+**Array数组对象
+
+##（1）创建数组
+在JavaScript中，使用内置对象类Array可以创建数组对象。
+
+##语法格式
+----1、新建一个长度为0的数组
+	var arrayname=new Array();   
+----2、新建一个指定长度为n的数组
+	var arrayname=new Array(n);  
+----3、新建一个指定长度的数组，并赋值
+	var arrayname=new Array(元素1,元素2,元素3,...); 
+
+##（2）使用for...in语句
+Javascript的for...in语句是一种特殊的for语句，专门用于处理与数组和对象相关的循环操作。用for…in语句处理数组，可以依次对数组中的每个数组元素执行一条或多条语句。
+
+##语法格式:
+	for(变量   in  数组对象){
+		//此处为JavaScript代码
+	}
+
+for···in实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>for...in</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a,b;
+			a=new Array("张三","李四","王五");
+			for(b in a) { 
+				document.write(a[b]+"<br/>");
+			}
+		</script>
+	</body>
+</html>
+
+##（3）数组的常用属性和方法
+数组是一组有序排列的数据的集合。
+
+属性/方法	                                                  说明
+length	                                         返回数组中数组元素的个数，即数组长度
+toString()	                                     返回一个字符串，该字符串包含数组中的所有元素，各个元素间用逗号隔开
+
+##数组的length属性是数组最常用的属性，该属性的值代表了数组中元素的个数。数组索引值是从0开始。
+
+##toString()属性用于返回一个字符串，该字符串包含数组中的所有元素，各个元素间使用逗号隔开。
+
+##数组的属性和方法实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数组的属性和方法</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var arr = [3, 8, 19];
+			var len = arr.length; //获取arr数组的length属性值，并赋值给len变量
+			console.log(len);
+			console.log(arr);
+			console.log(arr.toString());
+		</script>
+	</body>
+</html>
+
+##（4）二维数组
+对于复杂的业务逻辑，有时简单的一维数组不能够满足需求，需要使用二维数组。当数组中所有数组的元素也是数组时，就形成了二维数组。
+
+##二维数组实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>二维数组</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var students,i,j;
+			students=new Array();
+			students[0]=new Array("张三","18岁","男");
+			students[1]=new Array("李四","17岁","男");
+			students[2]=new Array("王五","18岁","女");
+			for(i in students){		
+				for(j in students[i]){
+					document.write(students[i][j] +"\t");
+				}
+				document.write("<br/>");
+			}	
+		</script>
+		<script type="text/javascript">
+			students=[["张三",18,"男"],["李四",17,"男"],["王五",18,"女"]];
+			for(var i=0;i<students.length;i++){
+			    for(var j=0;j<students[i].length;j++){
+			        document.write(students[i][j]+"\t");
+			    }
+			    document.write("<br/>");  
+			}	
+		</script>
+	</body>
+</html>
+

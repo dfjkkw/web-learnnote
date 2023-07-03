@@ -1,0 +1,90 @@
+**DOM节点树
+
+##DOM节点树
+DOM(Document Object Model)称为文档对象模型，是一个表示和处理文档的应用程序接口（API），可用于动态访问、更新文档内容、结构和样式。
+
+##DOM将网页中文档的对象关系规划为节点层级，构成它们之间的等级关系，这种各对象间的层次结构被称为节点树。
+
+**节点的访问
+
+##（1）访问指定元素
+
+一个元素对象可以拥有元素节点、文本节点、子节点或其它类型的节点。
+
+类型	                             方法	                                                    说明
+	                         getElementById()	                                   获取拥有指定ID的第一个元素对象的引用
+
+                            getElementsByName()	                               获取带有指定名称的元素对象集合
+访问指定节点
+                            getElementsByTagName()	                               获取带有指定标签名的元素对象集合
+
+                            getElementsByClassName()	                           获取指定class的元素对象集合（不支持IE6~8浏览器）
+
+访问指定元素实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>访问指定元素</title>
+		<script type="text/javascript">
+		    function init(){
+				var element = document.getElementById("js");  //找到<li id="js">的元素
+				element.style.fontWeight = "bold";   //将文本加粗
+				var lis = document.getElementsByTagName("li");  //找到所有li元素
+				lis[0].style.fontSize = "24px";   //将第一个li元素的字体设为24px
+		    }
+		</script>
+	</head>
+	<body onload="init()">
+		<ul>
+			<li id="html">HTML</li>
+			<li id="css">CSS</li>
+			<li id="js">JavaScript</li>
+			<li id="div">DIV</li>
+		</ul>
+	</body>
+</html>
+
+##（2）访问相关元素
+引用完成一个页面元素对象后，可以使用DOM节点对象的parentNode、childNodes、firstChild、lastChild、previousSibling或nextSibling属性访问相对于该页面元素的父、子或兄弟元素。
+
+属性						说明
+parentNode	  		  元素节点的父节点
+childNodes			  元素节点的子节点数组
+firstChild			  第一个子节点
+lastChild			  最后一个子节点
+previousSibling	  前一个兄弟节点
+nextSibling		  后一个兄弟节点
+
+##访问相关元素实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>访问相关元素</title>
+		<script type="text/javascript">
+			function init(){
+				var elem = document.lastChild; //找到<html>元素
+				console.log(elem.nodeName);
+				elem = elem.lastChild;  //找到<body>元素
+				console.log(elem.nodeName);
+				elem = elem.childNodes[1]; //找到<ul>元素
+				console.log(elem.nodeName);
+				elem = elem.childNodes[1]; //找到第一个<li>元素
+				console.log(elem.nodeName);
+				elem.style.fontWeight = "bold"; //将文本加粗
+				console.log(elem.nextSibling.nodeName); //这里出现问题？
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<ul>
+			<li id="html">HTML</li>
+			<li id="css">CSS</li>
+			<li id="js">JavaScript</li>
+			<li id="div">DIV</li>
+		</ul>
+	</body>
+</html>
+
+

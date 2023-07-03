@@ -1,0 +1,104 @@
+**prompt()函数
+
+##prompt()方法是JavaScript中窗口window对象的一个常用方法，用于显示和提示用户输入信息的对话框。
+
+##语法格式:
+	window.prompt("提示信息字符串，默认输入值");
+	prompt("提示信息字符串，默认输入值");
+
+**alert()函数
+
+##alert()函数主要用于弹出警示对话框，通常用于对用户进行提示。
+
+##语法格式:
+	window.alert("Hello World!");
+	alert("Hello World!");
+
+**console.log()函数
+
+##console.log方法用于标准输出流的输出，即在控制台中显示输出结果。
+
+##语法格式:
+	console.log (" Hello World");
+
+联合实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>联合案例</title>
+	</head>
+	<body>
+		您输入的密码是：
+		<script type="text/javascript">
+			var password= window.prompt("请输入密码：");
+			document.write(password);
+		</script>
+	</body>
+</html>
+
+**函数function
+
+##（1）函数的定义：
+在Javascript程序设计中，为了使代码更为简洁并可以重复使用，通常会将某段实现特定功能的代码定义成一个函数。在JavaScript中，函数使用关键字function来定义。
+
+##语法格式：
+	<script type="text/javascript">
+		function 函数名 ([参数1,参数2,……])｛
+			函数体
+		｝
+	</script>
+
+##（2）函数的调用
+函数定义后并不会自动执行，而是需要在特定的位置调用函数。函数的调用非常简单，只需引用函数名，并传入相应的参数即可。
+
+##语法格式
+	函数名称([参数1,参数2,……])
+在上述语法格式中，“[参数1，参数2…]”是可选的，用于表示参数列表，其值可以是一个或多个。
+
+函数实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>函数</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function sayHello(){
+				window.alert("你好！");
+			} 
+		</script>
+		<input type="button" onclick="sayHello()" value="按钮"/>
+	</body>
+</html>
+
+##（3）函数中变量的作用域
+函数中的变量需要先定义后使用，但这并不意味着定义变量后就可以随时使用。变量需要在它的作用范围内才可以被使用，这个作用范围称为变量的作用域。
+
+##在Javascript中，变量一般分为全局变量和局部变量。
+----全局变量：定义在所有函数之外，作用于整个程序的变量。 
+----局部变量：定义在函数体之内，作用于函数体的变量。
+
+##作用域实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>作用域</title>
+		<script type="text/javascript">
+			var a;       //该变量在函数外声明，作用于整个脚本代码
+			function send(){
+				a="欢迎学习";
+				var b="Web前端技术";   //该变量在函数内声明，只作用于该函数体
+				alert(a+b);
+			}
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			send();
+		</script>
+	</body>
+</html>
+

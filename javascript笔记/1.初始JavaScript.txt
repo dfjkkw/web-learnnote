@@ -1,0 +1,64 @@
+**Javascript简介
+
+##脚本(Script)
+就是一段程序，用来完成某些特殊的功能。脚本程序既可以在服务器端运行（称为服务器脚本，例如ASP脚本、PHP脚本等），也可以直接在浏览器端运行（称为客户端脚本）。客户端脚本常用来响应用户动作、验证表单数据，以
+及显示各种自定义内容，如对话框、动画等。
+
+##Javascript
+一种基于对象（Object）和事件驱动（Event Driven），并具有安全性能的脚本语言。它可与HTML、CSS一起实现在一个Web页面中链接多个对象，与Web客户交互的作用，从而开发出客户端的应用程序。
+
+**Javascript的引入
+##在 HTML文档中引入Javascript有两种方式：
+----在HTML文档中直接嵌入Javascript脚本，称为内嵌式；
+----链接外部Javascript脚本文件，称为外链式。
+
+**内嵌式
+
+##通过<script>标签及其相关属性可以引入Javascript代码。当浏览器读取到<script>标签时，就解释执行其中的脚本。
+
+##语法格式：
+	<head>
+	<script type="text/javascript">
+     	// 此处为JavaScript代码
+	</script>
+	</head>
+
+##内嵌式实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>内嵌式</title>
+			<script type="text/javascript">
+				document.write("欢迎学习Javascript技术");
+			</script>
+	</head>
+	<body>
+		<p>学习Javascript</p>
+	</body>
+</html>
+
+**外链式
+
+##当脚本代码比较复杂或者同一段代码需要被多个网页文件使用时，可以将这些脚本代码放置在一个扩展名为.js的文件中，然后通过外链式引入该js文件。
+
+##语法格式：
+	<script type="text/javascript" src="JS文件的路径"></script>
+
+##外链式实例
+js内容：
+document.write("你好！");
+
+html内容：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>外链式</title>
+		<script type="text/javascript" src="js/2.js" charset="UTF-8" language="JavaScript"></script>
+	</head>
+	<body>
+		<p>此处引用了一个Javascript文件</p>	
+	</body>
+</html>
+

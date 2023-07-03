@@ -1,0 +1,262 @@
+**元素对象常用操作
+
+##HTML DOM将HTML文档表示为一颗DOM对象树，每个节点对象表示文档的特定部分，因此通过修改这些对象，就可以动态改变页面元素的属性。
+
+类型				方法				说明
+创建节点	createElement()		创建元素节点
+		   createTextNode()	   创建文本节点
+
+节点操作   appendChild()	   为当前节点增加一个子节点（作为最后一个子节点）
+          insertBefore()	  为当前节点增加一个子节点（插入到指定子节点之前）
+          removeChild()	  删除当前节点的某个子节点
+
+元素对象常用操作实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>元素对象常用操作</title>
+		<script type="text/javascript">
+			function init(){
+		 		var h1 = document.createElement("h1"); //创建一个<h1>元素节点
+		 		var text = document.createTextNode("Hello,Javascript!"); //创建一个文本节点
+		 		h1.appendChild(text); //为<h1>元素追加文本节点
+		 		document.body.appendChild(h1); //为<body>追加<h1>元素
+		 	}
+		 </script>
+	</head>
+	<body onload="init()">
+	</body>
+</html>
+
+##元素属性与内容操作
+类型	                 属性/方法	                                  说明
+元素内容	           innerHTML                              获取或设置元素的HTML内容
+
+样式属性	           className	                          获取或设置元素的class属性
+                      style	                             获取或设置元素的style样式属性
+
+位置属性	      offsetWidth、offsetHeight	                 获取或设置元素的宽和高（不含滚动条）
+                scrollWidth、scrollHeight	                 获取或设置元素的完整的宽和高（含滚动条）
+                offsetTop、offsetLeft	                     获取或设置包含滚动条，距离上或左边滚动过的距离
+                scrollTop、scrollLeft	                     获取或设置元素在网页中的坐标
+
+属性操作	          getAttribute()	                      获得元素指定属性的值
+                    setAttribute()	                          为元素设置新的属性
+                    removeAttribute()	                      为元素删除指定的属性
+
+##元素属性与内容操作实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>元素属性与内容操作</title>
+		<script type="text/javascript">
+			function init() {
+		 		 var test = document.getElementById("test");  //获取test元素对象
+		 		 test.innerHTML = "<h1>Hello,JavaScript!</h1>";  //元素内容操作
+		 		 test.setAttribute("style","font-size:12px;color:red;");  //设置元素的属性
+		 		 test.innerHTML += test.getAttribute("style")  //获得元素的style属性并显示
+		 	}
+		</script>
+	</head>
+	<body onload="init()">
+		<div id="test">test</div>
+	</body>
+</html>
+
+**元素样式操作
+
+##操作元素属性时，style属性修改元素样式，className属性修改元素类名。
+----（1）style属性
+每个元素对象都有一个style属性，使用这个属性可以动态调整元素的内嵌样式，从而获得所需要的效果。
+
+例子：
+var test = document.getElementById("test");         //获得待操作的元素对象
+test.style.width = "200px";          //设置样式，相当于：#test{width:200px; }
+test.style.height = "100px";         //设置样式，相当于：#test{height:100px;}
+test.style.backgroundColor = "#ff0000" ;          //设置样式，相当于：#test{background-color:#ff0000;}
+var testWidth = test.style.width;          //获得width样式
+alert(testWidth);             //输出结果为“200px”
+
+----（2）className属性
+元素对象的className属性用于切换元素的类名，或为元素追加类名。
+
+例子：var test = document.getElementById("test");//获取元素对象 <div id="test">
+test.className = "aa";   //添加样式，执行后：<div id="test" class="aa">
+test.className = "bb";   //切换样式，执行后：<div id="test" class="bb">
+alert(test.className);   //获取样式，执行后输出：bb
+test.className += "cc";  //追加样式，执行后：<div id="test" class="bb cc">
+test.className = test.className.replace(/cc/,"dd");//替换样式，执行后：<div id="test" class="bb dd">
+test.className = test.className.replace(/dd/,"");//删除dd样式，执行后：<div id="test" class="bb">
+test.className = "";    //删除所有样式
+
+##元素样式操作实例：
+css代码：
+@charset "utf-8";
+/*重置浏览器默认样式*/
+body,ul,input,p,dl,dt,dd,h1{margin:0;padding:0;}
+/*全局控制*/
+body{min-width:755px;color:#6C6C6C;font-size:12px;}
+/*定义公共样式*/
+ul{list-style:none;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+.left{float:left;}
+.right{float:right;}
+/*用户信息栏*/
+#top{
+	height:30px;
+	width:100%;
+	line-height:30px;
+	background:#F7F7F7;
+	border-bottom:1px solid #EEE;
+}
+#top .top_nav{
+	max-width:1220px;
+	margin:0 auto;
+}
+#top ul{margin:0 20px;}
+#top li{
+	float:left;
+	padding:0px 5px 0px 0px;
+}
+#top .line{color:#CCC;}
+.right li{ cursor:pointer;}
+.right li span{ padding:0px 9px;}
+/*下拉列表*/
+.right .ul00{position: relative;}
+.right #ul01{
+ 	width: 95px;
+ 	display:none;
+ 	position:absolute;
+ 	left:0;
+ 	top:30px; 
+ 	background-color:#FFF;
+ 	border:thin; 
+ 	border-color:#EEE; }
+.right #ul01 a{
+	display:block;
+	padding:0 10px; 
+	line-height:28px;
+	color:#6C6C6C;}
+.right #ul01 a:hover{background:#F5F5F5;}
+/*传智商城头部*/
+#header{
+	width:1220px;
+	margin:0 auto;
+	padding-top:20px;
+}
+#header a{
+	width:240px;
+	display:block;
+}
+#header #search{
+	width:500px;
+	margin-top:15px;
+}
+#header #search input{
+	width:416px;
+	height:30px;
+	border:3px solid #E4393C;
+}
+#header #search .search_btn{
+	width:78px;
+	height:36px;
+	background: #E4393C;
+	font-size:14px;
+	font-weight:700;
+	color:#FFF;
+	cursor:pointer;
+}
+#header #search p{
+	color:#999;
+	font-size:12px;
+	margin-top:5px;
+}
+#header #info{
+	margin-top:18px;
+	margin-left:20px;
+}
+#header #info input{
+	height:32px;
+	border:1px solid #E3E3E3;
+	background-color: #F7F7F7;
+	color:#666;
+	padding:0 10px;
+	margin-right:12px;
+}
+
+
+js代码:
+function change(myid,mode){
+	document.getElementById(myid).style.display=mode;
+	if(mode == 'block'){//显示下拉菜单
+		//设置下拉菜单所在div的边框
+		document.getElementById(myid).style.border="1px solid #eee";
+		document.getElementById(myid).style.borderTop="none";
+		//设置鼠标划过的li的边框及背景颜色
+		document.getElementById(myid).parentNode.style.backgroundColor="#fff";
+		document.getElementById(myid).parentNode.style.border="1px solid #eee";
+		document.getElementById(myid).parentNode.style.borderBottom="none";
+		
+	}
+	else{
+		//当不显示下拉列表时，鼠标划过的li的边框及背景颜色
+		document.getElementById(myid).parentNode.style.backgroundColor="";
+		document.getElementById(myid).parentNode.style.border="";
+	}		
+}
+
+html代码：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>电商网站下拉菜单</title>
+		<link href="css/13.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="js/13.js"></script>
+	</head>
+	<body>
+		<div id="top">
+			<div class="top_nav">
+				<ul>
+					<li>亲，请登录</li>
+					<li>免费注册</li>
+				</ul>
+				<ul class="right">
+					<li class="ul00" onmouseover="change('ul01','block')" onmouseout="change('ul01','none')">
+						<span>我的商城</span>
+						<div id="ul01">
+							<a>已买到的宝贝</a>
+							<a>我的足迹</a>
+							<a>我的上新</a>
+							<a>爱逛街</a>
+							<a>商城达人</a>
+						</div>
+					</li>
+					<li class="line">|</li>
+					<li><span>购物车</span></li>
+					<li class="line">|</li>
+					<li><span>收藏夹</span></li>
+					<li class="line">|</li>
+					<li><span>卖家中心</span></li>
+					<li class="line">|</li>
+					<li><span>联系客服</span></li>
+				</ul>
+			</div>
+		</div>
+		<div id="header">
+				<a class="left"><img src="img/jdlogo.png"></a>
+				<div id="search" class="left">
+					<input type="text" class="left" />
+					<input class="search_btn" type="button" value="搜索" />
+					<p>热门搜索：大学教材　智能手机　平板电脑</p>
+				</div>
+				<div id="info" class="left">
+					<input type="button" value="会员中心" />
+					<input type="button" value="去购物车结算" />
+				</div>
+		</div>
+	</body>
+</html>

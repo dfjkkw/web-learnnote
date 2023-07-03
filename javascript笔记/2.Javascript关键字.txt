@@ -1,0 +1,12 @@
+**javascrip关键字
+
+##关键字（Reserved Words），又被称为“保留字”，是指在JavaScript语言中被事先定义好并赋予特殊含义的单词。
+
+abstract	   continue	     finally	   instanceof	    private	       this
+boolean	   default	     float	       int	            public	       throw
+break	       do	         for	       interface	    return	       typeof
+byte	       double	     function	   long	            short	       true
+case	       else	         goto	       native	        static	       var
+catch	       extends	    implements	   new	            super	       void
+char	       false	    import	       null	            switch	       while
+class	       final	    in	           package	        synchronized   with
