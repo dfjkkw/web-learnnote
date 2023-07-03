@@ -1,0 +1,286 @@
+**‘类’的实现
+
+##Javascript语言体系中，是不存在类（Class）的概念的，javascript中不是基于‘类的'，而是通过构造函数（constructor）和原型链（prototype chains）实现的。
+##在ES6中提供了更接近传统语言的写法，引入了Class（类）这个概念，作为对象的模板。通过class关键字，可以定义类。
+
+**构造函数
+
+##构造函数，就是提供了一个生成对象的模板并描述对象的基本结构的函数。一个构造函数，可以生成多个对象，每个对象都有相同的结构。
+##构造函数就是对象的模板，对象就是构造函数的实例。
+##构造函数的特点有：
+----a：构造函数的函数名首字母必须大写。
+----b：内部使用this对象，来指向将要生成的对象实例。
+----c：使用new操作符来调用构造函数，并返回对象实例。
+
+构造函数实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>构造函数</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Person(){
+				this.name = 'chenchen';
+				this.show = function(){
+					console.log(this.name);
+				}
+			} 
+			var girl = new Person();
+			girl.show();
+			
+			function Point(x,y){
+				this.x = x;
+				this.y = y;
+				this.show = function(){
+					console.log('Point（' + x +',' + y +'）');
+				}
+			} 
+			var point = new Point(5,10);
+			point.show();
+		</script>
+	</body>
+</html>
+
+##构造函数的缺点
+
+##所有的实例对象都可以继承构造函数中的属性和方法。同一个对象实例之间，无法共享属性。
+##Javascript提供了prototype属性。 Javascript中每个数据类型都是对象（除了null和undefined），而每个对象
+都继承自另外一个对象，后者称为“原型”（prototype）对象。只有null除外，它没有自己的原型对象。
+##原型对象上的所有属性和方法，都会被对象实例所共享。
+##通过构造函数生成对象实例时，会将对象实例的原型指向构造函数的prototype属性。每一个构造函数都有一个
+prototype属性，这个属性就是对象实例的原型对象。
+
+##构造函数的缺点实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>构造函数的缺点</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Person(){
+				this.name = 'chenchen';
+				this.show = function(){
+					console.log(this.name);
+				}
+				Person.prototype.showName = function(){
+					console.log(this.name);
+				}
+			} 
+			var girl = new Person();
+			var boy = new Person();
+			if(girl.show===boy.show){
+				console.log('girl.show===boy.show');
+			}
+			if(girl.showName===boy.showName){
+				console.log('girl.showName===boy.showName');
+			}	
+		</script>
+	</body>
+</html>
+
+**prototype
+
+##总结：对于构造函数来说，prototype是作为构造函数的属性；对于对象实例来说，
+prototype是对象实例的原型对象。所以prototype即是属性，又是对象。
+##原型对象的属性不是对象实例的属性。对象实例的属性是继承自构造函数定义的属性，
+因为构造函数内部有一个this关键字来指向将要生成的对象实例。只要修改原型对象上的
+属性和方法，变动就会立刻体现在所有对象实例上。
+##Prototype的作用：给已有的对象增加属性或者方法。
+##推荐使用方式：通常使用构造器（函数体）定义属性，使用原型对象（prototype）定义
+方法。如此，构造器只包含属性定义，而方法则分装在不同的代码块，使代码更具可读性：
+
+##prototype实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>prototype实例</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Rectangle(width,height){
+				this.width = width;
+				this.height = height;
+			} 
+			Rectangle.prototype.getArea = function(){
+				return this.width * this.height;
+			}
+			
+			var rect = new Rectangle(100,200);
+			console.log('面积为'+rect.getArea());
+			
+			Rectangle.prototype = {
+				getCircumference : function(){
+					return (this.width + this.height)*2;
+				}
+			}
+			rect = new Rectangle(100,200);
+			console.log('周长为'+rect.getCircumference());
+			console.log('面积为'+rect.getArea());//为什么？
+		</script>
+	</body>
+</html>
+
+**原型链（prototype chains）
+
+##对象的属性和方法，有可能是定义在自身，也有可能是定义在它的原型对象。由于原型对象本身
+对于对象实例来说也是对象，它也有自己的原型，所以形成了一条原型链（prototype chain）。
+
+##例如：a对象是b对象的原型，b对象是c对象的原型，以此类推。
+
+##所有一切的对象的原型顶端，都是Object.prototype，即Object构造函数的prototype属性指向
+的那个对象。
+
+##Object.prototype对象也有自己的原型对象，就是没有任何属性和方法的null对象，而null对象没
+有自己的原型。
+
+##原型链（prototype chain）的特点：
+----a：读取对象的某个属性时，Javascript引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，
+如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。
+----b：如果对象自身和它的原型，都定义了一个同名属性，那么优先读取对象自身的属性，这叫做“覆盖”（overiding）。
+----c：一级级向上在原型链寻找某个属性，对性能是有影响的。所寻找的属性在越上层的原型对象，对性能的影响越大。
+如果寻找某个不存在的属性，将会遍历整个原型链
+
+**constructor属性
+
+##constructor属性
+
+----prototype对象有一个constructor属性，默认指向prototype对象所在的构造函数。
+
+注意的是，prototype是构造函数的属性，而constructor则是构造函数的prototype属性所指向的那个对象，也就是原型对象的属性
+
+##constructor实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function A(){};
+			console.log('1:'+ (A.prototype.constructor===A)); //true
+			console.log('2:'+ (A.hasOwnProperty('prototype'))); //true
+			console.log('3:'+ (A.prototype.hasOwnProperty('constructor'))); //true
+			var a=new A(); 
+			console.log('4:'+a.constructor); //A()
+			console.log('5:'+(a.constructor===A.prototype.constructor));//true,a是构造函数A的实例对象，但是a自身没有contructor属性，该属性其实是读取原型链上面的
+		</script>
+	</body>
+</html>
+
+**Constructor的功能
+
+##Constructor功能
+----a：分辨原型对象到底属于哪个构造函数
+function A(){};  var a=new A(); 
+console.log(a.constructor===A) //true
+
+----b：从实例新建另一个实例
+var b = new a.constructor();
+console.log(b instanceof A); //true
+
+----c：调用自身的构造函数成为可能
+A.prototype.hello = function() {  return new this.constructor();  }
+
+**instanceof运算符
+
+##instanceof运算符
+返回一个布尔值，表示指定对象是否为某个构造函数的实例。
+
+##注意：
+----instanceof对整个原型链上的对象都有效，所以同一个实例对象，可能会对多个构造函数都返回true。
+----instanceof对象只能用于复杂数据类型（数组，对象等），不能用于简单数据类型（布尔值，数字，字符串等）。
+----null和undefined都不是对象，所以instanceof 总是返回false。
+
+##instanceof实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>instanceof</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function A() {};
+			var a = new A();
+			
+			//instanceof对整个原型链上的对象都有效
+			console.log(a instanceof A); //true
+			console.log(a instanceof Object); //true
+			
+			//instanceof对象只能用于复杂数据类型（数组，对象等），不能用于简单数据类型（布尔值，数字，字符串等）。
+			var x = [1];
+			var o = {};
+			var b = true;
+			var c = 'string';
+			console.log(x instanceof Array); //true
+			console.log(o instanceof Object); //true
+			console.log(b instanceof Boolean); //false
+			console.log(c instanceof String); //false
+			
+			//null和undefined都不是对象，所以instanceof 总是返回false
+			console.log(null instanceof Object); //false 
+			console.log(undefined instanceof Object); //false
+
+		</script>
+	</body>
+</html>
+
+**一种粗糙的继承的实现
+
+##使用原型prototype实现继承。
+
+##特点：
+----非常纯粹的继承关系，实例是子类的实例，也是父类的实例
+----父类新增原型方法/原型属性，子类都能访问到
+----简单，易于实现
+
+##缺点：
+----要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中
+----无法实现多继承
+----来自原型对象的所有属性被所有实例共享（来自原型对象的引用属性是所有实例共享的
+----创建子类实例时，无法向父类构造函数传参
+
+##粗糙的继承实现实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>一种粗糙的继承的实现</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 定义一个动物类
+			function Animal (name) {
+				// 属性
+				this.name = name || 'Animal';
+				// 实例方法
+				this.sleep = function(){
+					console.log(this.name + '正在睡觉！');
+				}
+			}
+			// 原型方法
+			Animal.prototype.eat = function(food) {
+				console.log(this.name + '正在吃：' + food);
+			};
+			
+			function Cat(){ 
+			}
+			Cat.prototype = new Animal();
+			Cat.prototype.name = 'cat';
+			
+			//　Test Code
+			var cat = new Cat();
+			console.log(cat.name);
+			console.log(cat.eat('fish'));
+			console.log(cat.sleep());
+			console.log(cat instanceof Animal); //true 
+			console.log(cat instanceof Cat); //true
+		</script>
+	</body>
+</html>

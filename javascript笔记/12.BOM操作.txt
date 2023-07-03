@@ -1,0 +1,165 @@
+**BOM操作
+
+##BOM（Browser Object Model）是浏览器对象模型，它提供了一系列对象用于与浏览器窗口进行交互。BOM对象
+包括window（窗口）、navigator（浏览器程序）、screen（屏幕）、location（地址）、history（历史）和document（文档）
+等对象。其中，window对象是浏览器的窗口，它是整个BOM的核心，位于BOM对象的最顶层。
+
+##（1）window对象
+window对象表示整个浏览器窗口，用于获取浏览器窗口的大小、位置，或设置定时器等。
+
+属性/方法	                                                                                                      说明
+document、history、location、navigator、screen	                                              返回相应对象的引用。例如document属性返回document对象的引用。
+
+parent、self、top	                                                                        分别返回父窗口、当前窗口和最顶层窗口的对象引用。
+
+screenLeft、screenTop、screenX、screenY	                                                    返回窗口的左上角、在屏幕上的X、Y坐标。Firefox不支持screenLeft、
+                                                                                             screenTop，IE8及更早的IE版本不支持screenX、screenY。
+
+innerWidth、innerHeight	                                                                     分别返回窗口文档显示区域的宽度和高度。
+
+outerWidth、outerHeight	                                                                     分别返回窗口的外部宽度和高度。
+
+closed	                                                                                      返回当前窗口是否已被关闭的布尔值。
+
+opener	                                                                                      返回对创建此窗口的窗口引用。
+
+open()、close()	                                                                              打开或关闭浏览器窗口。
+
+alert()、confirm()、prompt()	                                                                 分别表示弹出警告框、确认框、用户输入框。
+
+moveBy()、moveTo()	                                                                          以窗口左上角为基准移动窗口，moveBy()是按偏移量移动，moveTo()是移动到指定的屏幕坐标。
+
+scrollBy()、scrollTo()	                                                                      scrollBy()是按偏移量滚动内容，scrollTo()是滚动到指定的坐标。
+
+setTimeout()、clearTimeout()	                                                              设置或清除普通定时器。
+
+setInterval()、clearInterval()	                                                              设置或清除周期定时器。
+
+##（1）window对象
+----window对象的基本使用
+----window对象是最顶层的对象，调用它的属性或方法时可以省略window。
+
+//获取文档显示区域宽度
+var width = window.innerWidth;
+//获取文档显示区域高度（省略window）
+var height = innerHeight;
+//调用alert输出
+window.alert(width+"*"+height);
+//调用alert输出（省略window）
+alert(width+"*"+height);
+
+----打开和关闭窗口
+window.open()方法用于打开新窗口，window.close()方法用于关闭窗口。
+
+//弹出新窗口
+var newWin = window.open("new.html");
+//关闭新窗口
+newWin.close();
+//关闭本窗口
+window.close();
+
+----setTimeout()定时器的使用
+----setTimeout()定时器可以实现延时操作，即延时一段时间后执行指定的代码。
+
+//定义show函数
+function show(){
+	alert("2秒已经过去了");
+}
+//2秒后调用show函数
+setTimeout(show,2000);
+
+----当需要清除定时器时，可以使用clearTimeout()方法。
+
+function showA(){
+	alert("定时器A");
+}
+function showB(){
+	alert("定时器B");
+}
+//设置定时器t1，2秒后调用showA函数
+var t1 = setTimeout(showA,2000);
+//设置定时器t2，2秒后调用showB函数
+var t2 = setTimeout(showB,2000);
+//清除定时器t1
+clearTimeout(t1);
+
+----setInterval()定时器的使用
+----setInterval()定时器用于周期性执行脚本，即每隔一段时间执行指定的代码，通常用于在网页上显示时钟、实现网页动画、制作漂浮广告
+等。需要注意的是，如果不使用clearInterval()清除定时器，该方法会一直循环执行，直到页面关闭。
+
+网页时钟实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>网页时钟</title>
+		<script type="text/javascript">
+			var t;
+			var clock;
+			//定时器执行的函数
+			function updateDate(){
+				//获取系统时间
+				var dataTime = (new Date()).toLocaleString() + "<br />";
+				//将时间字符串写到<div id="clock"></div>中
+				clock.innerHTML = dataTime;
+			}
+			//清除定时器
+			function stopClock(){
+				clearInterval(t);
+			}
+			//初始化
+			function init(){
+				//全局变量clock保存用于显示时间的<div id="clock">元素
+				clock = document.getElementById("clock");
+				//全局变量t保存定时器
+				t = setInterval(updateDate,1000);
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<button onclick="stopClock()">停止</button>
+		<button onclick="init()">开始</button>
+		<div id="clock"></div>
+	</body>
+</html>
+
+##（2）screen对象
+screen对象用于获取用户计算机的屏幕信息，例如屏幕分辨率、颜色位数等
+
+属性	                                              说明
+width、height	                          屏幕的宽度和高度
+availWidth、availHeight	                  屏幕的可用宽度和可用高度（不包括Windows任务栏）
+colorDepth	                               屏幕的颜色位数
+
+##（3）location对象
+location对象用于获取和设置当前网页的URL地址。
+
+属性/方法	                                                  说明
+hash	                                     获取或设置URL中的锚点，例如“#top”。
+host	                                     获取或设置URL中的主机名，例如“itcast.cn”。
+port	                                     获取或设置URL中的端口号，例如“80”。
+href	                                     获取或设置整个URL，例如“http://www.itcast.cn/1.html”。
+pathname	                                 获取或设置URL的路径部分，例如“/1.html”。
+protocol	                                 获取或设置URL的协议，例如“http:”。
+search	                                     获取或设置URL地址中的GET请求部分，例如“?name=haha&age=20”。
+reload()	                                 重新加载当前文档。
+
+##（4）history对象
+history对象最初的设计和浏览器的历史记录有关，但出于隐私方面的考虑，该对象不再允许获取到用户访问过的URL历史。history对象主要的作用是控制浏览器的前进和后退。
+
+属性/方法	                                      说明
+back()	                           加载历史记录中的前一个URL（相当于后退）。
+forward()	                       加载历史记录中的后一个URL（相当于前进）。
+go(number|URL)	                   加载历史记录中的某个页面。参数为负数时为后退1步。
+
+##（5）document对象
+document对象用于处理网页文档，通过该对象可以访问文档中所有的元素。
+
+属性/方法	                               说明
+body	                               访问<body>元素。
+lastModified	                       获得文档最后修改的日期和时间。
+referrer	                           获得该文档的来路URL地址，当文档通过超链接被访问时有效。
+title	                               获得当前文档的标题。
+write()	                           向文档写HTML或JavaScript代码。
+
+

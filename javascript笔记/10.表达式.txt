@@ -1,0 +1,190 @@
+**表达式
+
+##定义
+表达式是一个语句集合，像一个组一样，计算结果是一个单一的值，该值可以是boolean、number、string、function或者object数据类型之一。
+
+**条件语句
+
+##（1）if语句
+if条件语句是最基本、最常用的条件控制语句。通过判断条件表达式的值为true或者false，来确定是否执行某一条语句。
+
+----语法结构：
+	1.
+	if（执行条件）{
+		执行语句;   
+	}
+	2.
+	if（执行条件）{
+        		执行语句1;   
+	}else{
+        		执行语句2;
+	}
+
+	3.
+	if（执行条件1）{
+        		执行语句1;   
+	}
+	else if（执行条件2）{
+        		执行语句2;
+	}
+	else if（执行条件3）{
+       		 执行语句3;
+	}
+	......
+
+##（2）switch语句
+switch条件语句是典型的多路分支语句。
+
+----语法结构
+
+	switch (表达式){
+		case 目标值1:
+			执行语句1
+			break;
+		．．．．．．
+		case 目标值n:
+			执行语句n
+			break;
+		default:
+			执行语句n+1
+			break;
+	}
+语句中break不写，不会报错。效果与C语言一样，会出现贯穿现象。
+
+switch实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var year=2020
+			var month=2;    
+			switch (month) {                                      
+				case 1:
+				case 3:
+				case 5:
+				case 7:
+				case 8:
+				case 10:
+				case 12: 
+					alert("31天"); 
+					break;  //跳出循环
+				case 4:
+				case 6:
+				case 9:	
+				case 11:
+					alert("30天");
+					break;	
+				case 2:
+					if(year%400==0 || year%4==0 && year%100 !=0){
+						alert("29天");
+					}else{
+						alert("28天");
+					}
+					break;	
+				default:
+					alert("错误月份");
+			}
+		</script>
+	</body>
+</html>
+
+**循环语句
+
+##（1）for语句
+循环可以将代码块执行指定的次数。
+
+	for (语句 1; 语句 2; 语句 3)
+	{
+    		被执行的代码块;
+	}
+
+语句 1 （代码块）开始前执行 starts.
+语句 2 定义运行循环（代码块）的条件
+语句 3 在循环（代码块）已被执行之后执行
+
+##（2）while语句
+只要指定条件为true，循环就可以一直执行代码块。while循环会在指定条件为true时循环执行代码块。
+
+	while (条件)
+	{
+         		执行语句
+	}
+
+##（3）do/while语句
+do/while循环是while循环的变体。该循环会在检查条件是否为真之前执行一次代码块，然后如果条件为true的话，就会重复这个循环。
+
+	do
+	{
+         		  需要执行的代码
+	}
+	while (条件);
+
+**跳转语句
+
+##JavaScript中的跳转语句有break语句与continue语句：
+break语句用于跳出循环；
+continue语句用于跳过循环中的一个迭代
+
+**eval()函数
+
+##eval()函数
+eval()函数可计算某个字符串，并执行其中的的 Javascript 代码。
+
+##语法格式
+	eval(string);
+string表示要计算的字符串，其中包含要计算的 Javascript 表达式或要执行的语句。
+
+##eval()函数实例
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			function calculate(){
+				//获取数据，并将其转化为浮点型数据
+				var num1 = parseFloat(document.getElementById("num1").value);
+				var num2 = parseFloat(document.getElementById("num2").value);
+				var oper = document.getElementById("operator").value;
+				//存放输出结果
+				var res = "";
+				//拼接运算表达式
+				var expression= num1+oper+num2;
+				//判断输入的数据，若不是数据或是为0，都为假；否则为真
+				if(num1 && num2){
+					//执行运算表达式，求出运算结果
+					eval("res="+expression);
+				}else{
+					//判断此运算是否为除法且除数是否为0
+					if((oper == "/") && (num2 ==0)){
+						res = "除数不能为0";
+					}else if(num1 && (num2 ==0) || (num1 ==0) && num2){
+						eval("res="+expression);
+					}else if((num1 ==0) && (num2 ==0)){
+						eval("res="+expression);
+					}else{
+						res = "请输入数字";
+					}
+				}
+				//将运算结果或提示写入到form表单中
+				document.getElementById('result').value = res;
+			 }
+		 </script>
+	</head>
+	<body>
+		<input type="text" id="num1" value=""/>
+		<select id="operator">
+			<option value="+" selected="selected">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
+		<input type="text" id="num2" value=""/>
+		<input type="button" value="=" onclick="calculate()"/>
+		<input type="text" id="result" readonly="true"/>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+**数据类型转换
+
+##（1）隐式类型转
+隐式类型转换是指程序运行时，系统会根据当前的需要，自动将数据从一种类型转换为另一种类型。
+
+<script type="text/jscript">
+	var age=prompt("请输入年龄:","0");//输入年龄数值
+	if(age<=0)//判断输入的年龄值是否小于0，age转换为数值型
+	{
+		alert("您输入的年龄不合法");
+	}
+	else{
+		alert("您的年龄为"+age+"岁");
+	}
+</script>
+
+##（2）显式类型转换
+显式类型转换和隐式类型转换相对，此转换过程需要手动转换到目标类型。
+
+<script type="text/jscript">
+	var person="175.5厘米";                   
+	person=parseInt(person);//将解析的字符串转换为整数
+	if(person===175){//对变量值进行判断
+		alert("身高为："+person+"厘米");//复合条件则输出解析后的身高
+		}
+	else{
+		alert("身高不符合标准");	          
+	}
+</script>
+

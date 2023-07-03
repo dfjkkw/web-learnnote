@@ -1,0 +1,398 @@
+**Javascript事件
+
+##Javascript事件
+采用事件驱动是Javascript语言的一个最基本特征，所谓的事件是指用户在访问页面时执行的操作。事件处理指的就是与事件关联的Javascript对象，当与页面特定部分关联的事件发生时，事件处理器就会被调用。
+
+##事件处理的过程通常分为三步
+----发生事件
+----启动事件处理程序
+----事件处理程序作出反应
+
+**事件处理程序的调用
+##事件处理程序的调用
+在使用事件处理程序对页面进行操作时，最主要的是如何通过对象的事件来调用事件处理程序。
+
+----方案（1）在HTML中添加Javascript
+----方案（2）在Javascript中调用事件处理程序
+在Javascript中调用事件处理程序，首先需要获得处理对象的引用，然后将要执行的处理函数赋值给对应的事件。
+
+方案（1）案例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>方案1</title>
+	</head>
+	<body>
+		<input type="button" name="btn" value="点击按钮" onclick="alert('按钮被点击了');"/>
+	</body>
+</html>
+
+方案（2）实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>方案2</title>
+	</head>
+	<body>
+		<button id="save">点击按钮</button>
+		<script type="text/javascript">
+			var btn = document.getElementById("save");
+			btn.onclick=function(){
+				alert("保存成功");	
+			}                    
+		</script>
+	</body>
+</html>
+
+**1键盘事件
+
+##键盘事件
+键盘事件是指通过键盘动作触发的事件，常用于检查用户向页面输入的内容。
+
+类别	                 事件	                     事件说明
+键盘事件	         onkeydown	            当键盘上的某个按键被按下时触发此事件
+                   onkeyup	               当键盘上的某个按键被按下后弹起时触发此事件
+                   onkeypress	           当输入有效的字符按键时触发此事件
+
+##键盘事件实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>键盘事件</title>
+		<title>键盘事件</title>
+		<style type="text/css">
+			*{padding:0;margin:0;list-style:none;}
+			.all{
+				margin:20px auto;
+				border:1px solid #000;
+				background:#eee;
+				width:300px;
+			}
+			ul{
+				height:50px;
+				line-height:50px;
+			}
+			.head{font-weight:bold;}
+			li{
+				text-align:center;
+				float:left;
+				width:100px;
+			}
+			#num{width:50px;}
+		</style>
+		<script type="text/javascript">
+			function checkNum(obj){ 
+				var num =  Number(obj.value);
+				//判断是否是数字
+				if(!num){
+					alert('请输入正确的数字');
+					//通过为元素对象的属性赋值，就可以改变这个属性的属性值
+					obj.value =1;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="all">
+			<ul class="head">
+				<li>商品</li>
+				<li>数量</li>
+				<li>操作</li>
+			</ul>
+			<ul>
+				<li>手机</li>
+				<li><input type="text" id="num" value="1" onkeyup="checkNum(this)"></li>
+				<li>删除</li>
+			</ul>
+		</div>
+	</body>
+</html>
+
+**2页面事件
+
+##页面事件
+页面事件是指通过页面触发的事件。
+
+类别	               事件	                       事件说明
+页面事件	        onload	                 当页面加载完成时触发此事件
+                  onunload	                当页面卸载时触发此事件
+
+##页面事件实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>页面事件</title>
+		<script type="text/javascript">	
+			function show(){
+				alert(document.getElementById('content').innerHTML);
+			}
+		</script>
+	</head>
+	<body onload="show()">
+		<div id="content">欢迎学习前端技术！</div>
+	</body>
+</html>
+
+**3鼠标事件
+
+##鼠标事件
+鼠标事件是指通过鼠标动作触发的事件。
+
+类别	                      事件	                事件说明
+鼠标事件	              onclick	             鼠标单击时触发此事件
+                        ondblclick	            鼠标双击时触发此事件
+                        onmousedown	        鼠标按下时触发此事件
+                        onmouseup	            鼠标弹起时触发的事件
+                        onmouseover	        鼠标移动到某个设置了此事件的元素上时触发此事件
+                        onmousemove	        鼠标移动时触发此事件
+                        onmouseout	            鼠标从某个设置了此事件的元素上离开时触发此事件
+
+##鼠标事件实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>鼠标事件</title>
+		<style type="text/css">
+			*{margin:0;padding:0;list-style: none;}
+			.all{margin:20px auto;width:300px;border:1px solid #000; background:#eee;}
+			ul{height:30px;line-height:30px;}
+			.head{font-weight: bold;}
+			li{text-align:center;float: left;width: 75px;}
+			.highLight{background-color:#FDFDC0;}
+		</style>
+		<script type="text/javascript">
+			/*
+			 obj参数接收调用方法时传入的'this'，'this'表示调用该方法的元素对象
+			 setAttribute用来为元素对象设置属性
+			 setAttribute第一个参数是属性名，第二个参数是属性值
+			 在调用对象方法时，通过对象名+“.”+方法名完成
+			 */
+			function heighLine(obj){
+				obj.setAttribute('class', 'highLight');
+			}
+			function rmHeighLine(obj){
+			    /* 
+				 removeAttribute用来删除元素对象的属性
+				 removeAttribute的参数表示要删除的属性名 
+				 */ 
+				obj.removeAttribute('class');
+			}
+			function showName(obj){
+				/* 
+				 innerHTML是元素对象的一个属性，用于保存该元素对象的文本内容
+				 获取对象属性值，通过对象名+“.”+属性名来完成 
+				 */ 
+				alert(obj. innerHTML);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="all">
+			<ul class="head">
+				<li>姓名</li>
+				<li>年龄</li>
+				<li>性别</li>
+				<li>国籍</li>
+			</ul>
+			<ul onmouseover="heighLine(this)" onmouseout="rmHeighLine(this)">
+				<li onclick="showName(this)" style="cursor:pointer;">Agnesi</li>
+				<li>21</li>
+				<li>女</li>
+				<li>英国</li>
+			</ul>
+			<ul onmouseover="heighLine(this)" onmouseout="rmHeighLine(this)">
+				<li onclick="showName(this)" style="cursor:pointer;">Eastman</li>
+				<li>17</li>
+				<li>女</li>
+				<li>法国</li>
+			</ul>
+			<ul onmouseover="heighLine(this)" onmouseout="rmHeighLine(this)">
+				<li onclick="showName(this)" style="cursor:pointer;">Mack</li>
+				<li>26</li>
+				<li>男</li>
+				<li>美国</li>
+			</ul>
+		</div>
+	</body>
+</html>
+
+**4表单事件
+
+##表单事件
+表单事件是指通过表单触发的事件。例如在用户注册的表单中可以通过表单事件完成用户名合法性检查、唯一性检查、用户密码合法性检查等等
+
+类别	                  事件	                事件说明
+表单事件	           onblur	       当前元素失去焦点时触发此事件
+                     onchange	       当前元素失去焦点并且元素内容发生改变时触发此事件
+                     onfocus	       当某个元素获得焦点时触发此事件
+                     onreset	       当表单被重置时触发此事件
+                     onsubmit	       当表单被提交时触发此事件
+
+##获得焦点与失去焦点事件实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>获得焦点与失去焦点事件</title>
+		<script type="text/javascript">
+			function txtfocus(obj){
+				obj.style.background="#ccc";
+			}
+			function txtblur(obj){
+				obj.style.background="#fff";
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" name="textfield" onfocus="txtfocus(this)" onBlur="txtblur(this)" />
+	</body>
+</html>
+
+**事件对象
+
+##事件对象
+事件对象（Event对象）代表事件的状态，例如触发event对象的元素、鼠标的位置及状态、按下的键等等.
+
+按键	键码	按键	键码	按键	键码	按键	键码
+A	   65	 J	  74	S	 83	   1	49
+B	   66	 K	  75	T	 84	   2	50
+C	   67	 L	  76	U	 85	   3	51
+D	   68	 M	  77	V	 86	   4	52
+E	   69	 N	  78	W	 87	   5	53
+F	   70	 O	  79	X	 88	   6	54
+G	   71	 P	  80	Y	 89	   7	55
+H	   72	 Q	  81	Z	 90	   8	56
+I	   73	 R	  82	0	 48	   9	57
+
+按键	      键码	按键	      键码	    按键	     键码	    按键	    键码
+Backspae	 8	    Esc	        27	       right	  39	   -_	    189
+Tab	     9	   Spacebar	    32	       down	      40	   .>	    190
+Clear	     12	   Page up	    33	       Insert	  45	   /?	    191
+Enter	     13	   Page down	34	       Delete	  46	   `~	    192
+Shift	     16	   End	        35	       Num Lock	  144	   [{	    219
+Ctrl	     17	   Home	        36	       :;	      186	   \|	    220
+Alt	     18	   left 	    37	       =+	      187	   ]}	    221
+Caps Lock	 20	   up 	        38	       ,<	      188	   ‘”	    222
+
+##事件对象实例:
+css代码：
+@charset "utf-8";
+/* CSS Document */
+/*清除浏览器的默认样式*/
+img{padding:0; margin:0; border:0; outline:none;}  
+.box{width:360px; height:198px; border:1px solid #EEE; margin:0 auto; background:url(../img/bg.png) no-repeat;}
+img{position:relative;}
+JS代码：
+// JavaScript Document
+//为网页设置键盘事件
+window.onload=function(){
+	document.body.onkeyup=function(evt){
+		//小球步长
+		var step = 20;
+		//获取div和小球的元素节点
+		var box = document.getElementById("box");
+		var img = document.getElementById("img");
+		//获取并转化小球相对于div左侧和顶部的距离
+		var left = parseInt(img.style.left);
+		var top = parseInt(img.style.top);
+		//div宽度和高度
+		var d_width = box.offsetWidth;
+		var d_height = box.offsetHeight;
+		//小球的宽度和高度
+		var b_width = img.width;
+		var b_height = img.height;
+		//小球距div左侧和顶部最大的距离
+		var x_max = d_width-b_width-step;
+		var y_max = d_height-b_height-step;
+		//创建事件对象：主流浏览器、IE浏览器
+		var e = evt ? evt : window.event;
+		//判断键盘的方向：左：37，上：38，右：39，下：40 
+		if(e.keyCode == 37 && left >=step){
+			img.style.left = left-step+"px";
+		}
+		if(e.keyCode == 38 && top >=step){
+			img.style.top = top-step+"px";
+		}
+		if(e.keyCode == 39 && left<= x_max){
+			img.style.left = left+step+"px"; 
+		}
+		if(e.keyCode == 40 && top <= y_max){
+			img.style.top = top+step+"px";
+		}
+	}
+}
+HTML代码：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>控制小球移动</title>
+		<link href="css/26.css" rel="stylesheet" type="text/css" />
+		<script src="js/26.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="box" class="box">
+			<img id="img" src="img/ball.png" style="left:50px; top:50px;" />
+		</div>
+	</body>
+</html>
+
+**String对象
+
+##String对象
+String对象是JavaScript提供的字符串处理对象，它提供了对字符串进行处理的属性和方法
+
+类型	    名称	                                               说明
+属性	    length	                              返回字符串中字符的个数。注：一个汉字也是一个字符。
+
+方法	    charAt(index)	                      返回指定索引（index）位置处的字符，第1个字符的索引为0，第2个字符的索引为1，以此类推。
+         indexOf(str[,startIndex])	            从前向后检索字符串。
+         lastIndexOf(search[,startIndex])	    从后向前搜索字符串。
+         substr(startIndex[, length])	        返回从起始索引号提取字符串中指定数目的字符。
+         substring( startIndex [,endIndex])	返回字符串中两个指定的索引号之间的字符。
+         split(separator [,limitInteger])	    把字符串分割为字符串数组。
+         search(substr)	                    检索字符串中指定子字符串或与正则表达式相匹配的值。
+         replace(substr,replacement)	        替换与正则表达式匹配的子串。
+         toLowerCase()	                        把字符串转换为小写。
+ 	      toUpperCase()	                        把字符串转换为大写。
+ 	      localeCompare()	                    用本地特定的顺序来比较两个字符串。
+
+##String对象实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>检测用户名是否合法</title>
+		<script type="text/javascript">
+			function isOtherChar(str){
+				//定义特殊字符的数组
+				var arr = ["!","<",">","&","(",")"];
+				//循环比较字符串中，是否含有特殊符号
+				for(var i=0;i<str.length; i++){
+					for(var j=0;j<arr.length;j++){
+						if(str.charAt(i)==arr[j]){
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+			//定义函数：checkChar()
+			function checkChar(){
+				var str = window.prompt("请输入用户名：不能含有!、<、>、&、(、)符号");
+				if(isOtherChar(str)){
+					alert("用户名"+str+"含有特殊符号！");
+				}else{
+					alert("用户名"+str+"输入合法！");
+				}
+			}
+		</script>
+	</head>
+	<body onload="checkChar()">
+	</body>
+</html>
