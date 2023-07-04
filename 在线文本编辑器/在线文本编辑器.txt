@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>在线文本编辑器</title>
+
+	<script charset="utf-8" src="kindeditor/kindeditor-all.js"></script>
+	<script charset="utf-8" src="kindeditor/lang/zh-CN.js"></script>
+	<script>
+			KindEditor.ready(function(K) {
+				window.editor = K.create('#editor_id');
+			});
+			var options = {
+				cssPath : '/css/index.css',
+				filterMode : true
+			};
+			var editor = K.create('textarea[name="content"]', options);
+	</script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-size: 16px;
+		}
+		label {
+			float: left;
+			width: 6%;
+			margin-left: 10px;
+			font-size: 20px;
+			font-weight: bold;
+			text-align: justify;
+			text-align-last: justify;
+			margin-right: 10px;
+		}
+		.d {
+			width: 100%;
+			height: 30px;
+			line-height: 30px;
+		}
+		.d div {
+			width: 80%;
+			height: 30px;
+			margin-left: 60px;
+		}
+		.d .commit {
+			margin-left: 10px;
+		}
+		form {
+			margin:5px;
+			border: 2px solid black;
+			width: 100%;
+		}
+		div:first-child {
+			margin-top: 10px;
+		}
+		div:last-child {
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<!--  -->
+	<form action="#" name="form" onsubmit="return checkForm()" >
+		<div class="d">
+			<label for="">标题</label>
+			<div class="title">
+				<input type="text" name="title" placeholder="请输入新闻标题(必填)" >
+			</div>
+		</div>
+		<div class="d">
+			<label for="">编辑</label>
+			<div class="editor">
+				<input type="text" name="editor" placeholder="请输入编辑名(选填)">
+			</div>
+		</div>
+		<div class="d">
+			<label for="">来源</label>
+			<div class="source">
+				<input type="text" name="source" placeholder="请注明文章来源(可选)">
+			</div>
+		</div>
+		<div class="d">
+			<label for="">作者</label>
+			<div class="author">
+				<input type="text" name="author" placeholder="请输入作者名字(可选)">
+			</div>
+		</div>
+		<div class="d">
+			<label for="">更新日期</label>
+			<div class="date">
+				<input type="datetime-local" name="date" id="datetime-local" value="">
+				<!-- 稍后替换为当前系统时间 -->
+			</div>
+		</div>
+		<div class="d">
+			<label for="">是否置顶</label>
+			<div class="setTop">
+				<input type="radio" name="top" checked>是
+				<input type="radio" name="top">否
+			</div>
+		</div>
+		<div class="d" id="KindEditor">
+			<label for="" class="KindEditor">新闻内容</label>
+		</div>
+		<textarea id="editor_id" name="content" style="width:800px;height:400px;">
+			&lt;strong&gt;新闻内容&lt;/strong&gt;
+		</textarea>
+		<div class="d">
+			<div class="commit">
+				<input type="submit">
+				<input type="reset">
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		function time() {
+			var d = new Date();
+			var t = d.toISOString();
+			var t1 = t.split('T')[0];
+			var t2 = t.split('T')[1].split(':');
+			var t3 = t1 + "T" + (parseInt(t2[0])+8) + ":" + t2[1];
+			document.getElementById("datetime-local").value = t3;
+			console.log(t3);
+		}
+		time();
+
+		// 检查表单元素不能为空
+		function checkNull(check_value, str) {
+			// var check_value = ele.value;
+			if(check_value == null || check_value == "") {
+				alert(str+"不能为空");
+				return true;
+			}
+			return false;
+		}
+		// 检查表单
+		function checkForm() {
+			var check_title = document.forms["form"]["title"].value;
+			var check_date = document.forms["form"]["date"].value;
+			// 标题
+			if(checkNull(check_title, "标题")) {
+				return false;
+			}
+			// 时间
+			if(checkNull(check_date, "日期")) {
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>
