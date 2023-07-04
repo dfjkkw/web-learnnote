@@ -1,0 +1,122 @@
+**jQuery概述
+
+##2006年1月，美国John Resing创建了一个基于JavaScript的开源框架——jQuery。
+
+##与JavaScript相比，jQuery具有代码高效、浏览器兼容性更好等特征，极大地简化了对DOM对象、事件处理、动画效果以及Ajax等操作。
+
+##官方网站：https://jquery.com/
+
+**jQuery对浏览器的兼容性
+
+##Desktop
+Chrome: (Current - 1) and Current
+Edge: (Current - 1) and Current
+Firefox: (Current - 1) and Current, ESR
+Internet Explorer: 9+
+Safari: (Current - 1) and Current
+Opera: Current
+
+##Mobile
+Stock browser on Android 4.0+[1]
+Safari on iOS 7+
+
+**jQuery的特点
+
+##jQuery的设计理念是“写更少，做更多”（The Write Less，Do More），是一种将JavaScript、CSS、DOM、Ajax等
+特征集于一体的强大框架，通过简单的代码来实现各种页面特效。
+
+##jQuery的特点如下：
+----（1）访问和操作DOM元素
+----（2）强大的选择器
+----（3）可靠的事件处理机制
+----（4）完善的Ajax操作
+----（5）链式操作方式
+----（6）完善的文档
+
+**下载jQuery
+
+##jQuery以下两种：
+开发版（Development version）
+生产版（Production version）
+
+版本	                    大小	                           描述
+jQuery 3.5.1.js	   280.89KB	                 开发版，完整无压缩，常用于研究、调试
+jQuery 3.5.1.min.js	87.38KB	                 生产版，体积压缩，主要用于产品和项目
+
+**使用CDN引入jQuery
+
+##引用分布在内容分发网络(Content Delivery Network, CDN)上的jQuery库。
+
+##优点：
+----（1）CDN通过负载均衡、分布式存储、调度等关键技术，使用户可以更快、更稳定的访问jQuery库，同时减轻了网站所在服务器的压力。
+----（2）如果用户在访问其他站点时，已经从一个来源网站上加载过jQuery库。当他们访问其它做相同引用的站点时，会从浏览器缓存中加载 jQuery，从而减少了加载时间。
+
+例子：
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+
+    序号	          来源	                                src
+----1	          jQuery官网	                   https://code.jquery.com/jquery-3.5.1.min.js
+----2	          百度静态资源公共库	             http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js
+----3	          字节跳动静态资源公共库	       https://s3.pstatp.com/cdn/expire-1-M/jquery/3.4.0/jquery.min.js
+----4	          新浪云计算CDN公共库	         http://lib.sinaapp.com/js/jquery/3.1.0/jquery-3.1.0.min.js
+
+**本地引入jQuery
+
+##CDN缺点：
+----在线引用受限于提供资源平台的网络情况
+----所提供的版本不一定满足需要，例如百度公共库就没有提供最新版本的jQuery库。
+----除了在线引用之外，可以采用本地引用的方式。
+<script src="js/jquery.min.js"></script>
+
+**jQuery重要概念
+
+##jQuery(document): jQuery()是jQuery的核心函数之一，可以接收XML文档和Window对象作为有效的参数, jQuery(document)是将document对象进行了jQuery封装，使其具有了jQuery对象的功能。
+
+##jQuery(document).ready(){}: ready()是jQuery对ready事件的处理函数。需要在DOM加载完后执行的代码必须放在 jQuery(document).ready(){}的执行体中。
+
+##“ $ ”是jQuery默认的别名，出现jQuery的地方都可以用$来替代。可以通过jQuery核心函数noConfilct()来让出jQuery对“$”符号的占用，重新命名其它的符号作为别名。
+
+##语法中的“jQuery”是大小写敏感的，写成“jquery”是错误的。
+
+var $cc = jQuery.noConflict();
+
+**网页加载自运行程序格式
+
+##jQuery自运行代码以下写法等效， $可以用jQuery代替。官方文档推荐第一种写法。
+
+$(handler);
+$(document).ready(handler); 
+$('document').ready( handler );
+$('img').ready( handler )
+$().ready( handler )
+
+##第1个jQuery实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>$()的使用</title>	
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<script>
+			$(function(){
+				console.log('$()的输出');
+			});
+			window.onload = function(){
+				console.log('onload的输出');
+			}
+			$(document).ready(function(){
+				console.log('$(document).ready的输出');
+			})
+		</script>
+	</body>
+</html>
+
+**window.onload与$()总结
+
+##Chrome内核，图片较大（无论img与background）$()先执行，否则反之。
+##IE浏览器，都是window.onload先执行。
+##$()可出现多次，在其内部定义的函数和变量只能在此范围内有效。
+##window.onload 一个页面只能出现一次，多次后面覆盖前面。
+

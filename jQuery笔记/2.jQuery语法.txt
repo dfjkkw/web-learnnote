@@ -1,0 +1,14 @@
+**jQuery语法
+
+##jQuery可以选取（查询query） HTML 元素，并执行“操作”（actions）。
+
+##基础语法
+	$(selector).action()
+----美元符号$定义 jQuery
+----选择符（selector）“查询”和“查找” HTML 元素
+----jQuery 的 action() 执行对元素的操作
+
+##举例
+----$(this).hide() - 隐藏当前元素	$("p").hide() - 隐藏所有段落
+----多个jQuery操作可以以链的形式串起来，链式语法格式：
+----$(selector). action1(). action2(). action3();

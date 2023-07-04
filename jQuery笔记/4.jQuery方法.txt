@@ -1,0 +1,248 @@
+**读取设置HTML或文本内容
+
+##读取或者设置指定元素的html内容。
+
+函数	                                                      描述与参数说明
+.html()	                              获取指定元素集合中第一个元素的HTML内容      返回值：字符串
+.html(htmlString)	                      设置指定元素集合中每一个元素的HTML内容      htmlString：HTML字符串
+.html(function(index,oldhtml))           设置指定元素集合中每一个元素的HTML内容
+                                         function：返回HTML字符串的函数； index：当前元素在集合中的索引；  
+                                         oldhtml：当前元素原有的html内容
+
+##读取或者设置指定元素的文本内容。
+
+text ( )	                               获取指定元素集合中所有元素包括其子元素的文本内容    返回值：字符串 
+.text(text)	                           设置指定元素集合中每一个元素的HTML内容    text：要设置为内容的字符串
+.text(function(index,text))	           设置指定元素集合中每一个元素的HTML内容
+                                          function：返回内容字符串的函数；index：当前元素在集合中的索引
+                                          text：当前元素原有的文本
+
+##读取或者设置指定元素的value内容。
+
+函数	                                      描述与参数说明
+.val()	                     获取指定元素集合中第一个元素的value内容      返回值：字符串
+.val(valueString)	         设置指定元素集合中每一个元素的value内容      valueString：字符串
+
+
+##读取设置HTML或文本内容实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>读取设置HTML或文本内容</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<p id="p1">
+				我本一个段落。点我，会变化的。
+			</p>
+		</div>
+		<div id="d2">
+			<p>段落二</p>
+		</div>
+		text1:<input id='text1' value="abc" type="text1的内容"/><br/>
+		text2:<input id='text2' value="abc" type="text2的内容"/><br/><br/>
+		<select id="multiple" multiple="multiple" style="height:160px">
+			<option selected="selected">Multiple</option>
+			<option>Multiple2</option>
+			<option selected="selected">Multiple3</option>
+			<option value="Multiple4">Multiple4</option>
+			<option value="Multiple5">Multiple5</option>
+			<option value="Multiple5">Multiple6</option>
+		 </select>
+		<script type="text/javascript">
+			$(function() {
+				console.log($('div').html());
+				$('#p1').click(function() {
+					$('#p1').html('<a href="#">变成超链了</a>');
+				});
+				console.log($('#d2').text());
+				$('#d2').click(function() {
+					$('#d2').text('<p>内容换了</p>');
+				});
+				console.log($('#text1').val());
+				$('#text2').val('chenchen');
+				$("#multiple").val(["Multiple4","Multiple5"]);
+			});
+		</script>
+	</body>
+</html>
+
+**读取设置attribute的值
+
+##读取或者设置指定元素的attribute的值。
+
+函数	                                                    描述与参数说明
+.attr(attributeName)	                         获取指定元素集合中第一个元素的指定标签属性的值
+attributeName：                                 标签属性的名字
+
+.attr(attributeName,value)	                     设置指定元素集合中每一个元素的指定标签属性的值
+                                                value：字符串、Number或者Null，要设置的值
+
+.attr(attributeName, function(inex,oldValue))	 设置指定元素集合中每一个元素的指定标签属性的值
+                                                function：函数，返回要设置的值
+                                                index：当前元素在集合中的索引
+                                                currentValue：当前元素标签属性原有的值
+
+.attr(attributes)	                            设置指定元素集合中每一个元素的一个或多个标签属性的值
+                                               attributes：JS简单对象，标签属性键值对
+
+##读取设置attribute的值实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>读取设置attribute的值</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<a href="http://www.tmall.com">天猫商城</a>
+			<a href="http://www.jd.com">京东商城</a>
+			<a href="#self">哪儿也不去</a>
+		</div>
+		<script>
+			$(function() {
+				console.log($('a[href^="http"]').attr('href'));
+				$('a[href^="http"]').attr({
+					target: '_blank',
+					style: 'text-decoration:none'
+				});
+				$('a[href^="#"]').attr('onclick','return false;');
+			});
+		</script>
+	</body>
+</html>
+
+**读取设置property的值
+
+##读取或者设置指定元素的property的值， jQuery官方文档推荐，在对DOM的动态属性，例如复选框的checked属性、按钮的disable属性等进行读取和设置时， 使用prop() 系列函数。
+
+函数	                                                           描述与参数说明
+.prop(propertyName)	                                获取指定元素集合中第一个元素的指定DOM属性的值
+                                                       propertyName：DOM属性的名字
+
+.prop(propertyName,value)	                            设置指定元素集合中每一个元素的指定DOM属性的值
+                                                       value：字符串、Number或者Null，要设置的值
+
+.prop(propertyName, function(inex,oldPropertyValue))	设置指定元素集合中每一个元素的指定DOM属性的值
+                                                       function：函数，返回要设置的值
+                                                       index：当前元素在集合中的索引
+                                                       oldPropertyValue：当前元素DOM属性原有的值
+
+.prop(properties)	                                   设置指定元素集合中每一个元素的一个或多个DOM属性的值
+                                                      properties：JS简单对象，DOM属性键值对
+
+##读取设置property的值实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>读取设置property的值</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<select>
+				<option>1</option>
+				<option selected="selected" id="op2">2</option>
+				<option>3</option>
+				<option>4</option>
+			</select>
+			<button disabled="disabled" onclick="alert(this.disabled)">
+				禁用状态
+			</button>
+			<input type="checkbox" checked="checked">
+		</div>
+		<div id="result">
+		</div>
+		<script>
+			$(function() {
+				$('button').prop('disabled', false).text('启用状态');
+				$('input').prop('checked', false);
+				var tips = '$("#op2").attr("selected")的结果是-->';
+				tips += $('#op2').attr('selected') + '<br>';
+				tips += '$("#op2").prop("selected")的结果是-->';
+				tips += $('#op2').prop('selected') + '<br>';
+				tips += '$("button").attr("disabled")的结果是-->';
+				tips += $('button').attr('disabled') + '<br>';
+				tips += '$("button").prop("disabled")的结果是-->';
+				tips += $('button').prop('disabled') + '<br>';
+				tips += '$("input").attr("checked")的结果是-->';
+				tips += $('input').attr('checked') + '<br>';
+				tips += '$("input").prop("checked")的结果是-->';
+				tips += $('input').prop('checked') + '<br>';
+				$('#result').html(tips);
+			});
+		</script>
+	</body>
+</html>
+
+**操作HTML元素相关方法
+
+方法	                          描述
+addClass()	             向匹配的元素添加指定的类名。
+after()	             在匹配的元素之后插入内容。
+append()                向匹配元素集合中的每个元素结尾插入由参数指定的内容。
+appendTo()	             向目标结尾插入匹配元素集合中的每个元素。
+attr()	                 设置或返回匹配元素的属性和值。
+before()	             在每个匹配的元素之前插入内容。
+clone()	             创建匹配元素集合的副本。
+detach()                从 DOM 中移除匹配元素集合。
+empty()	             删除匹配的元素集合中所有的子节点。
+hasClass()	             检查匹配的元素是否拥有指定的类。
+html()	                 设置或返回匹配的元素集合中的 HTML 内容。
+insertAfter()	         把匹配的元素插入到另一个指定的元素集合的后面。
+insertBefore()	         把匹配的元素插入到另一个指定的元素集合的前面。
+prepend()	             向匹配元素集合中的每个元素开头插入由参数指定的内容。
+prependTo()	         向目标开头插入匹配元素集合中的每个元素。
+remove()	             移除所有匹配的元素。
+removeAttr()	         从所有匹配的元素中移除指定的属性。
+removeClass()	         从所有匹配的元素中删除全部或者指定的类。
+replaceAll()	         用匹配的元素替换所有匹配到的元素。
+replaceWith()	         用新内容替换匹配的元素。
+text()	                 设置或返回匹配元素的内容。
+toggleClass()	         从匹配的元素中添加或删除一个类。
+unwrap()	             移除并替换指定元素的父元素。
+val()	                 设置或返回匹配元素的值。
+wrap()	                 把匹配的元素用指定的内容或元素包裹起来。
+wrapAll()	             把所有匹配的元素用指定的内容或元素包裹起来。
+wrapinner()	         将每一个匹配的元素的子内容用指定的内容或元素包裹起来。
+
+##为li添加图片前导实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<!-- <style>
+			ul{
+				list-style-image: url(img/prep.png);
+			}
+		</style> -->
+	</head>
+	<body>
+		<ul>
+			<li>内容1</li>
+			<li>内容2</li>
+			<li>内容3</li>
+			<li>内容4</li>
+			<li>内容5</li>
+			<li>内容6</li>
+		</ul>
+		<script>
+			$(function() {
+				$('li').css('list-style','none')
+					.prepend('<img src="img/prep.png" style="width:20px"/>')
+					.append(' 编辑：陈晨');
+			});
+		</script>
+	</body>
+</html>
+
+
+
+
+

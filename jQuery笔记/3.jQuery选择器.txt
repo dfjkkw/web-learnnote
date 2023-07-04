@@ -1,0 +1,580 @@
+**jQuery选择器
+
+##jQuery 元素选择器和属性选择器允许您通过标签名、属性名或内容对 HTML 元素进行选择。
+
+##基本选择器
+
+----jQuery基本选择器与CSS基本选择器一致。
+
+----序号	     英文名称	                    符号表示	           中文名称
+----1	    id selector	                      #id	               id选择器
+----2	    element selector	              element	           元素选择器
+----3	    class selector	                 .class	               类选择器
+----4	    all selector	                   *	               *选择器
+----5	    multiple selector  	selector1,selector2,selectorN	   多重选择器
+
+**jQuery基本选择器
+
+##（1）id选择器：根据给定的id选取唯一的一个元素。
+jQuery('#id') 或 $('#id') 
+##（2）元素选择器：选取所有满足给定的标签名的元素。
+jQuery('element')   或 $('element')
+##（3）类选择器：选取所有满足给定的类名的元素。
+jQuery('.class')   或 $('.class')
+##（4）多重选择器：返回一个复合结果，包含所有满足列出的选择器的元素。
+jQuery('selector1,selector2,…,selectorN')  或 $('selector1,selector2,…,selectorN')
+##（5）*选择器：选取网页中所有元素。
+jQuery('*')   或  $('*') 
+
+##基础选择器实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基础选择器</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<button id="btn1">按钮1</button>
+		<button class="myClass" id="btn2">按钮2</button>
+		<p class="myClass">段落</p>
+		<script>
+			$(document).ready(function(){
+				console.log('===============*选择器===============');
+				var elements=$('*');  
+				console.log(elements.length);
+				for(var i=0;i<elements.length;i++){
+					console.log(elements[i].tagName);
+				}
+				
+				console.log('===============元素选择器===============');
+				var btn=$('button');
+				for(var i=0;i<btn.length;i++){
+					console.log(btn[i].innerHTML);
+				}
+				
+				console.log('===============id选择器===============');
+				var btn1=$('#btn1');
+				btn1.click(function(){
+					alert('按钮1的单击');
+				});
+				
+				console.log('===============类选择器===============');
+				var btn2=$('.myClass');
+				btn2[0].click(function(){
+					alert('按钮2的单击');
+				});
+				
+				console.log('===============多重选择器===============');
+				var elements=$('button,.myClass');
+				for(var i=0;i<elements.length;i++){
+					console.log(elements[i].innerHTML);
+				}
+			})
+		</script>
+	</body>
+</html>
+
+**jQuery对象和DOM对象的区别
+
+##使用jQuery选择器获得了jQuery对象，jQuery对象是jQuery对DOM对象的封装，封装形式是一个数组，DOM对象是jQuery对象中的一个元素。  
+
+##将属于DOM对象的属性或者函数应用到了jQuery对象上，或者将属于jQuery的属性或者函数应用到DOM对象上都会出错。
+
+##jQuery对象转DOM对象
+----可以通过根据索引取出jQuery对象中的某个元素来完成，$('#btn2')[0]就是id为“btn2”的DOM对象了。
+----调用get(index)函数转换，$(‘#btn2’)[0]等同于$(‘#btn2’).get(0)。
+
+##DOM对象转jQuery对象，只需用jQuery()或者$()封装即可。
+
+##jQuery对象和DOM对象转换
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery对象和DOM对象转换</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<button id="btn1">按钮1</button>
+		<button id="btn2">按钮2</button>
+		<script>
+			$(document).ready(function(){
+				console.log('===============jQuery对象和DOM对象转换===============');
+				document.getElementById('btn1').style.borderColor='#F00';
+				$('#btn2')[0].style.borderColor='#F00'; 
+				console.log($('#btn2'));
+			})
+		</script>
+	</body>
+</html>
+
+**层次选择器
+
+##jQuery 层次选择器共有4种。
+
+   序号	     名称	              英文名称
+----1	    后代选择器	      ancestor descendant 
+----2	    子选择器	       parent > child
+----3	    相邻选择器	      prev + next
+----4	    兄弟选择器	      prev ～ siblings 
+
+##（1）后代选择器：后代选择器可以选取满足条件的所有层级的后代元素。
+jQuery('ancestor descendant') 或 $('ancestor descendant')
+##（2）子选择器：子选择器只选取满足条件的第一层级后代元素。
+jQuery('parent > child') 或 $('parent > child')
+##（3）相邻选择器：选取与指定元素同级并紧跟在它后面的相邻元素 。
+jQuery('prev+next') 或 $('prev+next ')
+##（4）兄弟选择器：prev元素之后的具有相同的父元素的所有兄弟元素。
+jQuery(prev ～ siblings')  或 $(prev ～ siblings')
+
+##层次选择器实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>层次选择器</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="grandfather">
+			<div id="father">
+				<div id="son1">老大</div>
+				<div id="son2">老二</div>
+				<div id="son3">老三</div>
+				<div id="son4">老四</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function(){
+				console.log('===============后代选择器===============');
+				var $divs = $('#grandfather div');
+				for(var i=0;i<$divs.length;i++){
+					console.log($divs[i].id);
+				}
+				
+				console.log('===============子选择器===============');
+				var $divs = $('#grandfather > div');
+				for(var i=0;i<$divs.length;i++){
+					console.log($divs[i].id);
+				}
+				
+				console.log('===============相邻选择器===============');
+				var $divs = $('#son2 + div');
+				for(var i=0;i<$divs.length;i++){
+					console.log($divs[i].id);
+				}
+				
+				console.log('===============兄弟选择器===============');
+				var $divs = $('#son2 ~ div');
+				for(var i=0;i<$divs.length;i++){
+					console.log($divs[i].id);
+				}	
+			})
+		</script>
+	</body>
+</html>
+
+##过滤选择器
+jQuery提供了丰富的过滤选择器（简称过滤器）。jQuery过滤器的标志符号是“:”，过滤条件添加在“:”后面。按照不同的过滤规则，
+过滤选择器可以分为基本过滤、内容过滤，可见性过滤三类。
+
+##基本过滤 
+
+   序号	  基本过滤器	                       功能
+----1	     :first 	           选取指定集合中的第一个元素。
+----2	     :last 	               选取指定集合中最后一个元素
+----3	     :not(selector) 	   去除指定集合中所有与给定选择器匹配的元素
+----4	     :even	               选取指定集合中索引为偶数的元素，索引从0开始
+----5	     :odd	               选取指定集合中索引为奇数的元素，索引从0开始
+----6	     :eq(index)	           选取指定集合中指定索引的元素，索引从0开始
+----7	     :gt(index)	           选取指定集合中索引大于指定index的元素，索引从0开始。
+----8	     :lt(index)”	       选取指定集合中索引小于指定index的元素，索引从0开始。
+----9	     :header	           选取指定集合中所有的标题元素，如hq、h2等
+---10	     :animated	           选取指定集合中当前正在执行的所有动画元素
+
+##基本过滤实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>过滤选择器</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<table id="bills">
+			<tr>
+				<th>编号</th>
+				<th>分类</th>
+				<th>名称</th>
+				<th>价格(元)</th>
+			</tr>
+			<tr >
+				<td>01</td>
+				<td>食品</td>
+				<td>农夫山泉矿泉水</td>
+				<td>2.00</td>
+			</tr>
+			<tr>
+				<td>02</td>
+				<td>日用品</td>
+				<td>洗发水</td>
+				<td>25.00</td>
+			</tr>
+			<tr>
+				<td>03</td>
+				<td>娱乐休闲</td>
+				<td>暑假旅游</td>
+				<td>5000.00</td>
+			</tr>
+		</table>
+		<script>
+			$(document).ready(function(){
+				var $first = $('#bills tr:first');
+				$first.css('background-color', 'yellow');
+				var $notFirstEven = $('#bills tr:gt(0):even');
+				$notFirstEven.css({
+					'background-color':'blue',
+					'color':'white'
+				});
+			})
+		</script>
+	</body>
+</html>
+
+##内容过滤
+
+   序号	    内容过滤器	                     功能
+    1	   :contains(text)	     选取指定集合中含有文本内容为“text ”的元素		
+    2	   :has(selector)	     选取含有指定选择器所匹配的元素的元素集合
+    3	   :empty	             选取指定集合中不包含子元素或者文本的空元素元素集合
+    4	   :parent	             选取指定集合中含有子元素或者文本的元素集合
+
+##内容过滤实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>内容过滤器</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<table id="bills">
+			<tr>
+				<th>编号</th>
+				<th>分类</th>
+				<th>名称</th>
+				<th>价格(元)</th>
+			</tr>
+			<tr >
+				<td>01</td>
+				<td>食品</td>
+				<td>农夫山泉矿泉水</td>
+				<td>2.00</td>
+			</tr>
+			<tr>
+				<td>02</td>
+				<td>日用品</td>
+				<td>洗发水</td>
+				<td>25.00</td>
+			</tr>
+			<tr>
+				<td>03</td>
+				<td>娱乐休闲</td>
+				<td></td>
+				<td>5000.00</td>
+			</tr>
+		</table>
+		<script>
+			$(document).ready(function(){
+				var $first = $('tr:has(th)');  
+				$first.css('background-color', 'yellow');  
+				var $food = $('#bills tr:contains(食品)');
+				$food.css({
+					'background-color' : 'blue',
+					'color' : 'white'
+				});
+				var $empty = $('#bills td:empty');
+				$empty.css('background-color', 'grey');
+				var $parent = $('#bills td:parent');
+				$parent.css('font-weight' , 'bolder');
+			})
+		</script>
+	</body>
+</html>
+
+##可见性过滤
+
+   序号	可见性过滤器	           功能
+    1	   :hidden	        选取指定集合中所有不可见元素
+    2	   :visible 	    选取指定集合中当前是可见的元素
+
+##除以下几种情况之外的元素都是可见元素
+----设置为 display:none
+----type="hidden" 的表单元素
+----width 和 height 设置为 0
+----隐藏的父元素（同时隐藏所有子元素）
+##设置为visibility:hidden的元素对于可见性过滤器来说也是可见元素
+
+##可见性过滤实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>可见性过滤</title>
+		<style>
+			#bills {
+				width: 400px;
+			}
+			.livinggoods {
+				visibility:hidden;
+			}
+			.leisure {
+				display: none;
+			}
+		</style>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<table id="bills">
+			<tr >
+				<th>编号</th>
+				<th>分类</th>
+				<th>名称</th>
+				<th>价格(元)</th>
+			</tr>
+			<tr class="food">
+				<td>01</td>
+				<td>食品</td>
+				<td>农夫山泉矿泉水</td>
+				<td>2.00</td>
+			</tr>
+			<tr class="livinggoods">
+				<td>02</td>
+				<td>日用品</td>
+				<td>洗发水</td>
+				<td>25.00</td>
+			</tr>
+			<tr class="leisure">
+				<td>03</td>
+				<td>娱乐休闲</td>
+				<td>暑假旅游</td>
+				<td>5000.00</td>
+			</tr>
+		</table>
+		<div class="emptyDiv"></div>
+		<script type="text/javascript">
+			$(function() {
+				var $hidden = $(':hidden');
+				var $visible = $(':visible');
+				var s = '';
+				console.log('可见的元素的类名是：');
+				for (var i = 0; i < $visible.length; i++) {
+					s = s + $visible[i].className + ' ';
+				};
+				console.log(s);
+				console.log('不可见的元素的类名是：');
+				for (var i = 0; i < $hidden.length; i++) {
+					s = s + $hidden[i].className + ' ';
+				};
+				console.log(s);
+			});
+		</script>
+	</body>
+</html>
+
+##属性选择器
+
+##HTML标签中通常包含有多个属性(attribute)。jQuery可以根据标签的各种属性，对由前面章节中讲授过的选择器选取的元素进行进一步的选择过滤。
+ 
+##属性选择器包含在中括号“[]”中，通常使用“选择器[属性选择器]”语法格式。
+
+   序号	        属性性过滤器	                                                    功能
+----1	    $("selector[attribute]") 	                                 选取包含给定属性的所有元素 
+----2	    $("selector[attribute=value]") 	                             选取给定属性等于某特定值的所有元素 
+----3	    $("selector[attribute*=value]") 	                         选取指定属性值包含给定字符串的所有元素
+----4	    $("selector[attribute~=value]") 	                         选取指定属性值中包含给定单词(由空格分隔)的元素 
+----5	    $("selector[attribute!=value]") 	                         选取不包含指定属性，或者包含指定属性但该属性不等于某个值的所有元素 
+----6	    $("selector[attribute^=value]") 	                         选取给定属性是以某特定值开始的所有元素 
+----7	    $("selector[attribute$=value]") 	                         选取给定属性是以某特定值结尾的所有元素 
+----8	    $("selector[selector1][selector2]...[selector[N]") 	         选取同时满足多个条件的所有元素 
+
+##属性选择器实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>属性选择器</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<select>
+			<option name="c1" value="Java程序设计基础">Java程序设计基础</option>
+			<option name="c2" value="HTML5开发基础">HTML5开发基础</option>
+			<option name="c3" value="HTML5开发进阶">HTML5开发进阶</option>
+			<option name="c4" value="jQuery前端开发实战">jQuery前端开发实战</option>
+			<option name="c5" value="UI设计" selected="selected">UI设计</option>
+		</select>
+		<script type="text/javascript">
+			$(function() {
+				var $classes1 = $('option[value*=HTML5]');
+				var $classes2 = $('option[selected=selected]');
+				$classes1.css('background-color', 'red');
+				$classes2.css('background-color', 'green');
+			});
+		</script>
+	</body>
+</html>
+
+**jQuery选择器的context参数
+
+##jQuery()函数还可以有两个参数，
+jQuery(selector,context) 或 $(selector,context)
+
+##context 参数指定上下文。在没有context参数的时候，jQuery()在document中查找符合选择器条件的元素；如果指定了context，
+则在context范围内超找符合选择器条件的元素。
+
+##context可以是DOM对象、document和jQuery，如果context是后两者，那么与不写是一样的，其查找范围是整个document。
+
+##jQuery选择器的context参数实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>context参数</title>
+		<script src="js/jquery.min.js"></script>
+		<style>
+			select{
+				height:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<form>
+			<select id="form1" multiple="multiple">
+				<option name="c1" value="Java程序设计基础">Java程序设计基础</option>
+				<option name="c2" value="HTML5开发基础">HTML5开发基础</option>
+				<option name="c3" value="HTML5开发进阶">HTML5开发进阶</option>
+				<option name="c4" value="jQuery前端开发实战">jQuery前端开发实战</option>
+				<option name="c5" value="UI设计" selected="selected">UI设计</option>
+			</select>
+			<select id="form2" multiple="multiple">
+				<option name="c1" value="Java程序设计基础">Java程序设计基础</option>
+				<option name="c2" value="HTML5开发基础">HTML5开发基础</option>
+				<option name="c3" value="HTML5开发进阶">HTML5开发进阶</option>
+				<option name="c4" value="jQuery前端开发实战">jQuery前端开发实战</option>
+				<option name="c5" value="UI设计" selected="selected">UI设计</option>
+			</select>
+		</form>
+		<script type="text/javascript">
+			$(function() {
+				var $classes1 = $('option[value*=HTML5]',document.getElementById('form1'));
+				var $classes2 = $('option[selected=selected]', jQuery);
+				$classes1.css('background-color', 'red');
+				$classes2.css('background-color', 'green');
+			});
+		</script>
+	</body>
+</html>
+
+##表单选择器
+
+英文名称	                       功能
+:button	         选取指定集合中所有所有所有 type="button"的元素和<button>元素
+:checkbox           选取指定集合中所有 type="checkbox" 的元素
+:file	             选取指定集合中所有 type="file" 的元素
+:focus	             选取指定集合中所有获得焦点的元素
+:image	             选取指定集合中所有 type="image" 的元素
+:input	             选取指定集合中所有 <input>、<textarea>、<select>、<button>元素
+:password	         选取指定集合中所有 type="password" 的元素
+:radio	             选取指定集合中所有 type="radio"的元素
+:reset	             选取指定集合中所有 type="reset"的元素
+:submit	         选取指定集合中所有 type="submit" 的元素
+:text	             选取指定集合中所有 type="text" 的元素
+:enabled	         选取指定集合中所有所有启用状态的元素，用于<button>、<input> 、<optgroup>、<option>、<select>以及<textarea>
+:disabled	         选取指定集合中所有禁用状态的元素
+:selected	         选取指定集合中所有被选取的<option>元素
+:checked	         选取指定集合中所有被选中的复选框、按钮和列表菜单元素
+
+##表单选择器实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单选择器</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="content">
+			<form id="form1" action="nextpage.html">
+				<fieldset>
+					<legend>
+					个人基本信息
+					</legend>
+					<label>姓名：</label><input type="text" id="name"/>
+					<label>密码：</label><input type="password" id="password"/>
+					<label>头像：</label><input type="file" id="file"/>
+					<label>性别：</label><input type="radio" name="gender" id="radio1"/><span>男</span>
+					<input type="radio" name="gender" id="radio2" checked="checked"/><span>女</span>
+					<br>
+					<label>选课：</label><input type="checkbox" name="course" id="checkbox1" checked="checked"/>UI设计
+					<input type="checkbox" name="course" id="checkbox2"/>jQuery开发
+					<br>
+					<label>专业方向：</label>
+					<select id="select">
+						<option id="java">Java</option>
+						<option selected="selected" id="net">.Net</option>
+						<option id="ui">UI</option>
+					</select>
+					<br>
+					<label>选课意向：</label>
+					<textarea id="textarea" disabled="disabled">请输入</textarea>
+					<input type="hidden" id="hidden"/>
+					<input type="reset" id="reset"/>
+					<input type="submit" id="submit" disabled="disabled"/>
+					<input type="button" value="input button" id="inputbutton"/>
+					<input type="image" src="img/timg.gif" id="image"/>
+				</fieldset>
+			</form>
+			<button id="button">
+			button
+			</button>
+			<div id="output"></div>
+		</div>
+		<script>  
+            $(function() {  
+				var list =  $(':input');
+				console.log('以下都是input元素：');  
+				for(var i=0;i<list.length;i++) {  
+					console.log(list[i].id);  
+				}; 
+				
+				list = $(':button');
+				console.log('以下都是:button元素：');  
+				for(var i=0;i<list.length;i++) {
+					console.log(list[i].id);  
+				};  
+				
+				list = $(':selected');
+				console.log('以下都是:selected元素：');  
+				for(var i=0;i<list.length;i++) {
+					console.log(list[i].id);   
+				};  
+				
+				list = $(':checked');
+				console.log('以下都是:checked元素：');  
+				for(var i=0;i<list.length;i++) {
+					console.log(list[i].id);  
+				};  
+				
+				list = $(':disabled');
+				console.log('以下都是:disabled元素：');  
+				for(var i=0;i<list.length;i++) {
+					console.log(list[i].id);  
+				};   
+            });  
+        </script>  
+
+	</body>
+</html>
+

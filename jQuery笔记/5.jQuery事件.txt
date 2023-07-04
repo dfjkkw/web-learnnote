@@ -1,0 +1,338 @@
+**事件处理机制
+
+事件event是可以被 Javascript 侦测到的行为。浏览器客户端上客户触发的行为都称为事件。JS是事件驱动的语言，网页的交互性少不了事件的支持。
+
+##事件传递方式
+----事件捕获（ event capturing ）：事件由目标元素向后代元素逐级传递的机制 。
+----事件冒泡（ dubbed bubbling ）：事件由目标元素向祖先元素逐级传递，直到DOM根节点的机制。
+
+##语句
+	element.addEventListener(event, function, useCapture)
+
+参数	                               描述
+event	         必须。字符串，指定事件名。注意: 不要使用 "on" 前缀。 例如，使用 "click" ,而不是使用 "onclick"。 
+
+function	     必须。指定要事件触发时执行的函数。 
+
+useCapture	     可选。布尔值，指定事件是否在捕获或冒泡阶段执行。可能值:（1）true - 事件句柄在捕获阶段执行
+                （2）false- 默认。事件句柄在冒泡阶段执行。
+
+
+##事件传递实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件传递</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="b1">
+				<div id="b2" >
+					<span id="b3"> 事件传递的路径是: </span>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			window.onload = function() {  
+				var b1 = document.getElementById('b1');  
+				var b2 = document.getElementById('b2');  
+				var b3 = document.getElementById('b3');  
+				$container=$("#container");  
+				b1.addEventListener('click', function(evt) {  
+					$container.append('b1 ');  
+				}, false);  
+				b2.addEventListener('click', function(evt) {  
+					$container.append('b2 ');  
+				}, false);  
+				b3.addEventListener('click', function(evt) {  
+					$container.append('b3 ');    
+				}, false);  
+			}; 
+			//addEventListener()必须用removeEventListener()解除 
+		</script>
+	</body>
+</html>
+
+##event对象的标准函数：
+函数	                            描述
+initEvent()	          初始化新创建的 Event 对象的属性
+preventDefault()	      阻止事件关联的默认动作。
+stopPropagation()	      阻止事件的传递。
+
+不同浏览器对event对象的支持是存在差异的，例如：IE里的是全局变量window.event ，随时可用；firefox里的要用参数引导才能用，是运行时的临时变量。不同浏览器中，event的属性也有差别。 
+
+##两种方式来阻止事件
+----方式一：event.stopPropagation();
+event.stopPropagation() 则只阻止事件往上冒泡，不阻止事件本身。
+----方式二：return false;
+return false 不仅阻止了事件往上冒泡，而且阻止了事件本身。
+
+##jQuey event对象的属性有很多。以下给出常用事件属性。
+属性	                           描述
+currentTarget	       事件冒泡阶段中的当前的DOM元素
+data	               绑定事件时向事件处理函数传递的数据
+pageX	               鼠标相对document左边缘的位置
+pageY	               鼠标相对document上边缘的位置
+target	               触发此事件的目标元素
+timeStamp	           事件发生时，距离1970年1月1日的毫秒数
+type	               返回当前 Event 对象表示的事件的名称。
+
+##更多内容查看：https://www.w3school.com.cn/jquery/jquery_ref_events.asp
+
+**jQuery event函数
+
+属性	                                                 描述
+isDefaultPrevented()	               返回preventDefault ()是否在当前event对象上被调用过
+isImmediatePropagationStopped()	   返回stopImmediatePropagation()是否在当前event对象上被调用过
+isPropagationStopped()	               返回stopPropagation()是否在当前event对象上被调用过
+preventDefault()	                   阻止事件关联的默认动作
+stopImmediatePropagation()	           阻止剩余的事件处理函数的执行，并防止当前事件在DOM树上冒泡
+stopPropagation()	                   阻止事件的传递。
+
+**jQuey事件管理函数
+
+函数	                                                                  描述
+.on( events [, selector ] [, data ], handler )  或
+.on( eventsObj[, selector ] [, data ] ) 	                为指定元素绑定事件和处理函数。
+
+.off( events [, selector ] handler )  
+或 
+.off( ) 	                                                为指定元素解除绑定事件和处理函数。
+
+.one( events [, selector ] [, data ], handler )  或 
+.one(eventsObj [, selector ] [, data ] ) 	                为指定元素绑定事件和处理函数。每个元素只能运行一次事件处理器函数。 
+
+.triggerHandler(eventType|event[, extraParameters ] ) 	    触发指定元素集合中第一个元素的绑定事件。
+
+.trigger(eventType|event[, extraParameters ] ) 	        触发指定元素的绑定事件。
+
+$.proxy(function,context[,additionalArgs ] ) 或
+$.proxy(context,name[, additionalArgs ] ) 	                向上下文指向不同对象的元素绑定事件
+
+参数	                              描述
+events	                    字符串，事件名称
+selector	                可选，选择器字符串，过滤条件，过滤指定集合的子集
+data	                    可选，需要向处理函数传递的数据
+handler	                事件处理函数
+eventsObj               	JS简单对象，事件和事件处理函数键值对
+eventType	                字符串，事件名称
+Event	                    jQuery.Event对象
+extraParameters	        数组或者JS简单对象，其它需要传递给处理函数的参数
+function	                要改变上下文的函数
+context	               JS简单对象，新的上下文。
+name	                   字符串，要改变上下文的函数名称
+additionalArgs	           需要传递给函数的其它参数。
+
+**事件委派（delegation）
+##jQuery事件委派优点：
+----可以解决动态添加的后代元素事件绑定的问题。
+----可以避免频繁在页面中做动态的事件绑定和解绑。 
+----当多个元素需要监听相同的事件，使用事件的授权，在它们的一个祖先节点上监听该事件，可以降低开销、提高效率 。
+
+##事件委派实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#b1 {
+				width: 200px;
+				height: 200px;
+				text-align: left;
+			}
+			#b2 {
+				width: 160px;
+				height: 160px;
+				margin: 0 auto;
+			}
+			#b3 {
+				width: 100px;
+				height: 100px;
+				margin: 0 auto;
+			}
+			#b4 {
+				width: 50px;
+				height: 50px;
+				margin: 0 auto;
+			}
+			.border1 {
+				border: 1px solid black;
+			}
+		</style>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="b1">
+				b1
+				<div id="b2" >
+					b2
+					<div id="b3">
+						b3
+					</div>
+				</div>
+			</div>
+			<button id="btn">
+				取消背景颜色改变
+			</button>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$('#container').on('dblclick', '#b4', addBorder);
+				//$('#b4').on('dblclick',addBorder);
+				$('#b2').on('mousedown', lightOn)
+						.on('mouseup', lightOff);
+				//$('#b1').one('mousedown', '#b2', lightOn);
+				$('#btn').before('<span id="b4"> b4 </span><br>').click(function() {
+					//$('#b2').off('mousedown');
+					$('#b2').off('mousedown');
+				});
+				function addBorder() {
+					$(this).addClass('border1');
+				};
+				function lightOn() {
+					$(this).css('background', 'lightgreen');
+				};
+				function lightOff() {
+					$(this).css('background', 'white');
+				};
+			});
+		</script>
+	</body>
+</html>
+
+**鼠标事件函数
+
+函数	                                                描述
+.click()	                             触发指定元素集合的左键单击事件处理函数
+.click([data,] handler )	             在指定元素集合上绑定左键单击事件的处理函数
+.contextmenu()	                         触发指定元素集合的右键单击事件处理函数
+.contextmenu([data,] handler )	         在指定元素集合上绑定右键单击事件的处理函数
+.dblclick()	                         触发指定元素集合的左键双击事件处理函数
+.dblclick( [data, ] handler )	         在指定元素集合上绑定左键双击事件的处理函数
+.hover( [data, ] handler )	             在指定元素集合上绑定鼠标进入和离开事件的处理函数
+.mousedown()	                         触发指定元素集合的鼠标按下事件处理函数
+.mousedown( [data, ] handler )	         在指定元素集合上绑定鼠标按下事件的处理函数
+.mouseup()	                             触发指定元素集合的释放鼠标事件处理函数
+.mouseup( [data, ] handler )	         在指定元素集合上绑定释放鼠标事件的处理函数
+.mouseenter()	                         触发指定元素集合的鼠标进入事件处理函数
+.mouseenter( [data, ] handler )	     在指定元素集合上绑定鼠标进入事件的处理函数
+.mouseleave() 	                         触发指定元素集合的鼠标离开事件处理函数
+.mouseleave( [data, ] handler ) 	     在指定元素集合上绑定鼠标离开事件的处理函数 
+.mousemove()	                         触发指定元素集合的鼠标在元素内移动事件处理函数
+.mousemove( [data, ] handler )	         在指定元素集合上绑定鼠标在元素内移动事件的处理函数
+.mouseover()	                         触发指定元素集合的鼠标进入元素及其子元素事件处理函数
+.mouseover( [data, ] handler )	         在指定元素集合上绑定鼠标进入元素及其子元素事件的处理函数
+.mouseout()	                         触发指定元素集合的鼠标离开元素及其子元素事件处理函数
+.mouseout( [data, ] handler )	         在指定元素集合上绑定鼠标离开元素及其子元素事件的处理函数
+
+事件委派实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#b1 {
+				width: 200px;
+				height: 200px;
+				background: lightblue;
+				text-align: left;
+			}
+			#b2 {
+				width: 160px;
+				height: 160px;
+				background: lightgreen;
+				margin: 0 auto;
+			}
+			#b3 {
+				width: 100px;
+				height: 100px;
+				background: red;
+				margin: 0 auto;
+			}
+			#b4 {
+				width: 100px;
+				height: 100px;
+				background: orange;
+			}
+			.border1 {
+				border: 2px solid black;
+			}
+			.border2 {
+				border: 4px solid blue;
+			}
+		</style>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="b1">
+				b1
+				<div id="b2" >
+					b2
+					<div id="b3">
+						b3
+					</div>
+				</div>
+			</div>
+			<div id="b4">
+				b4
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$('#b1').mouseenter(function() {
+					$(this).addClass('border1');
+				});
+				$('#b1').mouseout(function() {
+					$(this).removeClass('border1');
+				});
+				/* $('#b1').mouseover(function() {
+					$(this).addClass('border1');
+				});
+				$('#b1').mouseleave(function() {
+					$(this).removeClass('border1');
+				}); */
+				
+				$('#b1').mousemove(function(e) {
+					//只能在IE下使用,FireFox只能使用e.originalEvent.layerX,下面是兼容性写法 
+					var coordinate = 'X:' + e.originalEvent.x || e.originalEvent.layerX || 0; 
+					coordinate += ' Y:' + e.originalEvent.y || e.originalEvent.layerY || 0;
+					$('#b3').text(coordinate);
+				});
+				$('#b3').dblclick(function(e) {
+					$(this).addClass('border2');
+					//e.stopPropagation();
+				});
+				$('#b4').dblclick(function(e) {
+					$('#b3').dblclick();
+				});
+				$('#container').dblclick(function(e) {
+					$('#b3').dblclick();
+				});
+			});
+		</script>
+	</body>
+</html>
+
+**键盘事件函数
+
+函数	                                                    描述
+.keydown()	                                 触发指定元素集合的键盘按下事件处理函数
+.keydown( [data, ] handler )	             在指定元素集合上绑定键盘按下事件的处理函数
+.keypress()	                             触发指定元素集合的键盘按下事件处理函数
+.keypress( [data, ] handler )	             在指定元素集合上绑定键盘按下事件的处理函数
+.keyup()	                                 触发指定元素集合的键盘释放事件处理函数
+.keyup( [data, ] handler )	                 在指定元素集合上绑定键盘释放事件的处理函数
+.resize( )	                                 触发窗口大小改变事件处理函数
+.resize ([data], handler )	                 在指定元素集合上绑定窗口大小改变事件的处理函数
+.scroll ( )	                             触发指定元素或浏览器窗口滚动条滚动事件处理函数
+.scroll([data], handler )	                 在指定元素浏览器窗口上绑定滚动条滚动事件的处理函数
+.ready(handler)	                         绑定DOM加载完毕后处理函数
+
+
+

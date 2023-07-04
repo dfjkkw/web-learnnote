@@ -1,0 +1,12 @@
+{	
+	"code":0,
+	"msg":"成功",
+	"data":{
+		"personnelCode":"20000",
+		"personnelName":"陈晨",
+		"departmentCode":"001",
+		"departmentName":"信息",
+		"personnelPassword":"123456",
+		"status":0
+	}
+}

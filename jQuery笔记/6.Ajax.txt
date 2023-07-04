@@ -1,0 +1,120 @@
+**Ajax简介
+
+##AJAX即“Asynchronous Javascript And XML”（异步JavaScript和XML），是指一种交互式web应用的开发技术，由于“掩盖”了
+同步传输造成的明显的等待，为用户带来了更好的体验。 
+
+##不同的浏览器在对AJAX技术的支持上也存在的差异，而jQuery屏蔽了这样差异，定义了一套对AJAX的支持函数。
+
+**XMLHTTPRequest对象
+
+##AJAX技术的底层核心是使用XMLHttpRequest对象与服务器进行异步通信，结合CSS、JavaScript技术将数据显示在网页上。
+
+##XMLHttpRequest前身是微软的ActiveX技术，而AJAX技术的流行则得益于Google的大力推广。
+
+## XMLHttpRequest 对象提供的属性和函数，用于在不阻塞用户网页无刷新的情况下和服务器交换数据，是AJAX的核心机制。
+
+**XMLHttpRequest对象属性表
+
+属性	                                          描述
+onreadystatechange	            JS函数，readyState状态值改变时都会触发这个事件处理函数
+ontimeout	                    JS函数，服务器方超时时的处理函数
+readyState	                    请求的状态
+responseText	                字符串，服务器的响应文本
+responseXML	                表示为XML的服务器的响应，这个对象可以解析为一个DOM对象
+status	                        服务器的HTTP状态
+statusText	                    HTTP状态的对应文本
+timeout	                    超时时长，单位毫秒
+
+    值	状态	                           描述
+----0	未初始化	         xmlHttpRuquest对象已存在，还没有调用send()函数 
+----1	载入	               已调用open()函数初始化xmlHttpRuquest对象，已调用send()方法，正在发送请求 
+----2	载入完成	         send()方法执行完成，已经接收到全部响应内容。
+----3	交互	               正在解析响应内容
+----4	完成	               响应内容解析完成，可以在客户端通过XMLHttpRequest对象的相应属性取得数据
+
+     值	       状态	                           常用状态码及描述
+----1XX	接收到请求并继续处理 	            100：继续。 101：切换协议。 
+----2XX	请求成功	                     200：客户端请求已成功。 
+----3XX	重定向	                          301：永久重定向。 302：临时重定向。
+----4XX	客户单错误	                    404：未找到 
+----5XX	服务器端错误	                   500：内部服务器错误 
+
+**XMLHttpRequest对象常用方法
+
+方法	                                                       描述与参数说明
+abort()	                                                 停止当前请求
+
+getAllResponseHeaders()	                                 把HTTP请求的所有响应头作为键/值对返回
+
+getResponseHeader(header)	                                 返回指定的 HTTP 响应头部的值
+
+header：字符串，指定的响应头名称
+
+open(method,url[,async][,username][,password])	              建立对服务器的调用
+                                                             method：GET、POST或PUT等
+                                                             url：目标文件在服务器上的位置
+                                                             async：布尔型。默认值为true，采用异步方式，值为false时，采用同步方式
+                                                             username：用户认证所需用户名
+                                                             password：用户认证所需密码
+
+send([content])	                                          向服务器发送请求
+                                                             content：字符串。采用POST方式发送请求时，用于配置参数
+
+setRequestHeader(header,value)	                              把指定HTTP请求头设置为所提供的值
+                                                             header：字符串，响应头名称
+                                                             value：响应头的值
+
+
+##ajax实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="container"></div>
+		<button>获取信息</button>
+		<script>
+			$(function() {
+				var xhr = null;
+				function stateListener() {
+					if (xhr.readyState == 4 && xhr.status == 200) {
+						// 服务器成功响应
+						$('#container').prepend(xhr.responseText);
+					} else {
+						console.log(xhr.statusText);
+					}
+				};
+				function getLinks(url) {
+					xhr = null;
+					if (window.XMLHttpRequest) {
+						xhr = new XMLHttpRequest();
+					} else if (window.ActiveXObject) {//IE6、IE5 浏览器
+						xhr = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					if (xhr != null) {
+						// 指定状态改变的监听函数
+						xhr.onreadystatechange = stateListener;
+						xhr.open("GET", url, true);
+						//设置请求头，POST方式必须设置，GET方式不需要
+						xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+						//var args = 'name=chenchen&url=xxx.com';//参数需要用&符号隔开
+						var args;
+						xhr.send(args);
+					} else {
+						alert("您的浏览器不支持 XMLHttpRquest");
+					}
+				};
+				$('button').click(function() {
+					getLinks('18_result.html');
+				});
+			});
+
+		</script>
+	</body>
+</html>
+18_result.html内容：
+<h1>chenchen</h1>
+

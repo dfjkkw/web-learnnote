@@ -1,0 +1,156 @@
+**JSON简介
+
+##JavaScript 对象表示法（JavaScript Object Notation）。JSON 是存储和交换文本信息的语法。类似 XML。JSON 比 XML 更小、更快，更易解析。
+
+##保存文件扩展名为.json
+
+##语法是 JavaScript 对象表示法语法的子集。
+----数据在名称/值对中
+----数据由逗号分隔
+----花括号保存对象
+----方括号保存数组
+
+**JSON的值
+
+##JSON 值可以是：
+----数字（整数或浮点数）
+----字符串（在双引号中）
+----逻辑值（true 或 false）
+----数组（在方括号中）
+----对象（在花括号中）
+----null
+
+
+**jQuery对AJAX的支持
+
+##jQuery对ajax的支持有以下几个方面：
+----对浏览器进行了兼容性处理
+----对ajax底层机制进行了封装，提供了底层接口函数
+----提供了简单易用的ajax快捷函数
+----为数据的传递提供了辅助函数
+----提供了多种ajax全局事件和局部事件函数，监控交互状态的改变
+
+**jQuery的Ajax函数
+
+函数	                                                                                             描述与参数说明
+$.ajax( url [, settings ] )或$.ajax( [settings ] )	                                          执行异步http（ajax）请求。
+
+$.ajaxPrefilter([ dataType ,] handler )	                                                   指定预先处理Ajax参数选项的回调函数 
+                                                                                              handler(options, originalOptions, jqXHR)：为新的ajax请求设置默认值
+                                                                                              options:请求选项
+                                                                                              originalOptions:为$.ajax()提供的选项
+                                                                                              jqXHR:请求的jqXHR对象 
+
+$.ajaxSetup(settings )	                                                                       设置全局 AJAX 默认选项 
+
+$.ajaxTransport(dataType, handler(options, originalOptions, jqXHR)	                           创建处理AJAX数据的实际传输对象 jQuery的Ajax函数
+
+
+##json实例：
+
+19.js内容：
+
+var company={
+	"employees": [
+		{ 	"firstName":"John" , 
+			"lastName":"Doe" 
+		},
+		{	"firstName":"Anna" , 
+			"lastName":"Smith" 
+			},
+		{ 	"firstName":"Peter" , 
+			"lastName":"Jones" 
+		}
+	],
+	"boss":"chenchen"
+};
+
+html内容：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>json</title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/19.js"></script>
+	</head>
+	<body>
+		<script>
+			$(function() {
+				console.log(company.employees.boss);
+				var employees = company.employees;
+				for(var i=0;i<employees.length;i++){
+					console.log(employees[i]);
+				}
+			});
+		</script>
+	</body>
+</html>
+
+##jQuery的ajax实例
+
+20.json内容放在data文件中，内容为：
+{	
+	"code":0,
+	"msg":"成功",
+	"data":{
+		"personnelCode":"20000",
+		"personnelName":"陈晨",
+		"departmentCode":"001",
+		"departmentName":"信息",
+		"personnelPassword":"123456",
+		"status":0
+	}
+}
+
+HTML内容：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery的Ajax</title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div>
+			<label>人员代码</label>
+			<div>
+				<input type="text" name="personnelCode" id="personnelCode" placeholder="请输入人员代码" autocomplete="off" >
+			</div>
+		</div>
+		<br>
+		<div>
+			<label>人员姓名</label>
+			<div>
+				<input type="text" name="personnelName" id="personnelName" placeholder="请输入人员姓名" autocomplete="off" >
+			</div>
+		</div>
+		<br>
+		<div>
+			<button>立即提交</button>
+		</div>
+		<script>
+			$('#personnelCode').keyup(function(event){
+				console.log($('#personnelCode').val());
+				$.ajax({
+					type: "get", //实际项目使用的post
+					url: "data/20.json",
+					"data": {
+						'personnelCode':$('#personnelCode').val()
+					},
+					dataType: "json",
+					success: function(data){
+						console.log(data);
+						if(data.code==0 && data.data.personnelCode==$('#personnelCode').val()){
+							$('#personnelName').attr('value',data.data.personnelName);
+						}
+						else{
+							$('#personnelName').attr('value','');
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
+
