@@ -1,0 +1,84 @@
+**layui导航
+
+##导航框
+
+##导航一般指页面引导性频道集合，多以菜单的形式呈现，可应用于头部和侧边，是整个网页画龙点晴般的存
+在。面包屑结构简单，支持自定义分隔符。千万不要忘了加载 element模块。
+
+##虽然大部分行为都是在加载完该模块后自动完成的，但一些交互操作，如呼出二级菜单等，需借助element
+模块才能使用。
+
+##水平导航支持的其它背景主题有：
+----layui-bg-cyan（藏青）
+----layui-bg-molv（墨绿）
+----layui-bg-blue（艳蓝） 
+
+##垂直导航支持的其它背景主题有：
+----layui-bg-cyan（藏青） 
+
+##垂直导航需要layui-nav-tree 侧边导航layui-nav-tree layui-nav-side
+
+##layui导航实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui导航</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+	</head>
+	<body>
+		<!-- 导航 -->
+		<ul class="layui-nav" lay-filter="">
+			<li class="layui-nav-item">
+				<a href="">控制台<span class="layui-badge">9</span></a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="">个人中心<span class="layui-badge-dot"></span></a>
+			</li>
+			<li class="layui-nav-item" style="float:right">
+				<a href=""><img src="img/larryms.jpg" class="layui-nav-img">我</a>
+				<dl class="layui-nav-child">
+					<dd><a href="javascript:;">修改信息</a></dd>
+					<dd><a href="javascript:;">安全管理</a></dd>
+					<dd><a href="javascript:;">退了</a></dd>
+				</dl>
+			</li>
+		</ul>
+		
+		<br>
+		<!-- 树形导航 -->
+		<ul class="layui-nav layui-nav-tree" lay-filter="">   <!-- layui-nav-side 试试 -->
+			<li class="layui-nav-item"><a href="">最新活动</a></li>
+			<li class="layui-nav-item layui-this"><a href="">产品</a></li>
+			<li class="layui-nav-item"><a href="">大数据</a></li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">解决方案</a>
+				<dl class="layui-nav-child"> <!-- 二级菜单 -->
+				<dd><a href="">移动模块</a></dd>
+				<dd><a href="">后台模版</a></dd>
+				<dd><a href="">电商平台</a></dd>
+				</dl>
+			</li>
+		</ul>
+		
+		<br>
+		<!-- 面包屑导航 -->
+		<span class="layui-breadcrumb" lay-separator="-">
+		  <a href="javascript:;">首页</a>
+		  <a href="javascript:;">国际新闻</a>
+		  <a href="javascript:;">亚太地区</a>
+		  <a><cite>正文</cite></a>
+		</span>
+		<script src="layui/layui.js"></script>
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function(){
+				var element = layui.element;
+
+				//…
+			});
+		</script>
+	</body>
+</html>
+

@@ -1,0 +1,106 @@
+**layui选项卡
+
+##选项卡
+
+##Tab(Module-Tabs)也称选项卡、页签。是指将多个分类内容放置在同一个布局块内，但每次只有一个分类的内容是可见的，当使用
+鼠标切换不同分类时，展示不同的内容。
+
+##选项卡样式：layui-tab（父容器）、layui-tab-title（标题）、layui-tab-content（内容）、layui-tab-item（具体选项卡）
+----对应项：layui-this、layui-show
+----简洁风格：layui-tab-brief
+----卡片风格：layui-tab-card
+----带删除的Tab：对父层容器设置属性 lay-allowClose="true" 来允许Tab选项卡被删除
+
+##layui选项卡实例
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui选项卡</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+	</head>
+	<body>
+		<!-- 默认Tab选项卡 -->
+		<div class="layui-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this">网站设置</li>
+				<li>用户管理</li>
+				<li>权限分配</li>
+				<li>商品管理</li>
+				<li>订单管理</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">内容1</div>
+				<div class="layui-tab-item">内容2</div>
+				<div class="layui-tab-item">内容3</div>
+				<div class="layui-tab-item">内容4</div>
+				<div class="layui-tab-item">内容5</div>
+			</div>
+		</div>
+		
+		<!-- 简洁Tab选项卡 -->
+		<div class="layui-tab layui-tab-brief">
+			<ul class="layui-tab-title " >
+				<li class="layui-this">网站设置</li>
+				<li>用户管理</li>
+				<li>权限分配</li>
+				<li>商品管理</li>
+				<li>订单管理</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">内容1</div>
+				<div class="layui-tab-item">内容2</div>
+				<div class="layui-tab-item">内容3</div>
+				<div class="layui-tab-item">内容4</div>
+				<div class="layui-tab-item">内容5</div>
+			</div>
+		</div>
+		
+		<!-- 简洁Tab选项卡 -->
+		<div class="layui-tab layui-tab-card">
+			<ul class="layui-tab-title ">
+				<li class="layui-this">网站设置</li>
+				<li>用户管理</li>
+				<li>权限分配</li>
+				<li>商品管理</li>
+				<li>订单管理</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">内容1</div>
+				<div class="layui-tab-item">内容2</div>
+				<div class="layui-tab-item">内容3</div>
+				<div class="layui-tab-item">内容4</div>
+				<div class="layui-tab-item">内容5</div>
+			</div>
+		</div>
+		
+		<!-- 简洁Tab选项卡，带删除 -->
+		<div class="layui-tab layui-tab-card" lay-allowClose="true" >
+			<ul class="layui-tab-title ">
+				<li class="layui-this">网站设置</li>
+				<li>用户管理</li>
+				<li>权限分配</li>
+				<li>商品管理</li>
+				<li>订单管理</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">内容1</div>
+				<div class="layui-tab-item">内容2</div>
+				<div class="layui-tab-item">内容3</div>
+				<div class="layui-tab-item">内容4</div>
+				<div class="layui-tab-item">内容5</div>
+			</div>
+		</div>
+		
+		<script src="layui/layui.js"></script>
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function(){
+				var element = layui.element;
+		
+				//…
+			});
+		</script>
+	</body>
+</html>

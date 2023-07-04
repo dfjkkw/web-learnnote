@@ -1,0 +1,160 @@
+**layui表格模块
+
+##表格模块
+
+##table 模块是 layui 最核心的组成之一。它用于对表格进行一些列功能和动态化数据操作，涵盖了日常业务
+所涉及的几乎全部需求。支持固定表头、固定行、固定列左/列右，支持拖拽改变列宽度，支持排序，支持多级
+表头，支持单元格的自定义模板，支持对表格重载（比如搜索、条件筛选等），支持复选框，支持分页，支持
+单元格编辑等等一些列功能。
+
+##原始的table，只需要加样式layui-table即可。
+
+##Layui表格实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui表格</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+	</head>
+	<body>
+		<table class="layui-table">
+			<colgroup>
+				<col width="150">
+				<col width="200">
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+				<th>昵称</th>
+				<th>加入时间</th>
+				<th>签名</th>
+				</tr> 
+			</thead>
+			<tbody>
+				<tr>
+					<td>贤心</td>
+					<td>2016-11-29</td>
+					<td>人生就像是一场修行</td>
+				</tr>
+				<tr>
+					<td>许闲心</td>
+					<td>2016-11-28</td>
+					<td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
+
+##layui表格模块实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui表格模块</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+	</head>
+	<body>
+		<div class="layui-row">
+			<form class="layui-form layui-col-md12">
+				<input class="layui-input" placeholder="请输入文章名" autocomplete="off" name="title" id="title" style="width:190px">
+				<button class="layui-btn" lay-submit="" lay-filter="search">
+					<i class="layui-icon layui-icon-search"></i>
+				</button>
+			</form>
+		</div>
+		
+		<table id="tableId" lay-filter="test"></table>
+		 
+		<script src="layui/layui.js"></script>
+		<script>
+			layui.use(['element', 'table', 'form', 'jquery'], function(){
+				var table = layui.table;
+				var element = layui.element;
+				var form = layui.form;
+				var $ = layui.jquery;
+
+				var options={
+					elem: '#tableId'
+					,height: 312
+					,url: 'data/12.json' //数据接口
+					,where: {
+						//'title' : '',
+						//'typeId' : '<%= request.getParameter("typeId")==null?"":request.getParameter("typeId")%>'
+					}
+					,method: 'get'
+					,limit: 10
+					,limits: [5,10,15,20,99]
+					,page: {
+						curr:1
+					}
+					//page: true //开启分页
+					,cols: [[ //表头
+						{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+						,{field: 'username', title: '用户名', width:80}
+						,{field: 'sex', title: '性别', width:80, sort: true}
+						,{field: 'city', title: '城市', width:80} 
+						,{field: 'sign', title: '签名', width: 177}
+						,{field: 'experience', title: '积分', width: 80, sort: true}
+						,{field: 'score', title: '评分', width: 80, sort: true}
+						,{field: 'classify', title: '职业', width: 80}
+						,{field: 'wealth', title: '财富', width: 135, sort: true},
+						,{title: '操作', width: 65, templet: '#operationTpl', align: 'center'}
+					]]
+				};
+				//第一个实例
+				table.render(options);
+				
+				form.on('submit(search)', function () {
+					layer.msg('正在查询，请稍后...', {icon: -1, time: 3000});
+					
+					var title = $('#title').val();
+					//options.where.title = title;
+					options.page.curr=1;
+					table.reload('tableId',options);
+					return false;
+				});
+				
+				table.on('tool(tableFilter)', function (obj) {
+				            var data = obj.data;
+				            var layEvent = obj.event;
+				            if (layEvent === 'hide') {
+				            	var url = $(this).attr("data-url");
+				            	console.log("选择的id-->" + url);
+				                layer.confirm("确定要设置为不可见吗？", {skin: 'layui-layer-lan', icon: 3, title: '提示', anim: 6}, function () {
+				                    $.ajax({
+				                        type: "get",//post
+				                        "url": url,
+				                        dataType: "json",
+				                        success: function(data){
+				                        	console.log(data);
+				                        	layer.msg("操作成功！", {icon: 1, time: 3000}, function () {
+				                                $(".layui-laypage-btn")[0].click();
+				                            });
+				                        },
+										error: function (jqXHR, textStatus, errorThrown) {
+											/*弹出jqXHR对象的信息*/
+											console.log(jqXHR.responseText);
+											console.log(jqXHR.status);
+											console.log(jqXHR.readyState);
+											console.log(jqXHR.statusText);
+											/*弹出其他两个参数的信息*/
+											console.log(textStatus);
+											console.log(errorThrown);
+										}
+				                    });
+				                });
+				            } 
+				        });
+			  
+			});
+		</script>
+		
+		<script type="text/html" id="operationTpl">
+			<a href="javascript:;" title="隐藏" lay-event="hide" data-url="url?id={{d.id}}" class="layui-btn layui-btn-warm layui-btn-xs">隐藏</a>
+		</script>
+	</body>
+</html>

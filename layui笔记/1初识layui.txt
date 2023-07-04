@@ -1,0 +1,312 @@
+**layui概述
+
+##layui是一款前端 UI 框架，遵循原生 HTML/CSS/JS 的书写与组织形式，门槛较低，拿来即用。layui 首个版本发布于 2016 年秋，是为服务端程序员量身定做，
+无需涉足各种前端工具的复杂配置，只需面对浏览器本身。
+
+##layui 兼容正在使用的全部浏览器（IE6/7除外），可作为 PC 端后台系统与前台界面的速成开发方案。
+
+##官方网站：https://www.layui.com
+
+##layui使用手册：https://layui.dev/docs/2.8/
+
+##使用时直接将layui的文件夹导入所创的项目中
+
+**layui基本结构
+
+  ├─css //css目录
+  │  │─modules //模块css目录
+  │  │  ├─laydate
+  │  │  ├─layer
+  │  │  ├─layim
+  │  │  └─……
+  │  └─layui.css //核心样式文件
+  ├─font  //字体图标目录
+  ├─images //图片资源目录（目前只有layim和编辑器用到的GIF表情）
+  │─lay //模块核心目录
+  │  └─modules //各模块组件
+  │─layui.js //基础核心库，一般建议团队开发和代码调试
+  └─layui.all.js //包含layui.js和所有模块的合并文件，非模块化方式
+
+##layui基本结构实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui的基本结构</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+	</head>
+	<body>
+		<button id="btn" class="layui-btn">按钮</button>
+		<script src="layui/layui.js"></script>
+		<script>
+			//一般直接写在一个js文件中
+			layui.use(['layer', 'form'], function(){
+				var layer = layui.layer;
+				var form = layui.form;
+				var $ = layui.$; //引入layui内部的jQuery，此句也可以$=layui.jquery
+				
+				console.log($.fn.jquery);
+				
+				$('#btn').click(function(){
+					layer.msg('Hello World');
+				});
+			});
+		</script> 
+	</body>
+</html>
+
+**layui栅格系统
+
+##layui在2.0版本中引进了一套具备响应式的栅格系统。 layui 的栅格系统采用12 等分规则，内置
+移动设备、平板、桌面中等和大型屏幕的多终端适配处理，最低能支持到ie8。
+
+##栅格布局规则
+----采用 layui-row 来定义行，如：<div class=“layui-row”></div>。
+----采用类似 layui-col-md* 的预设类来定义一组列（column）且放在行（row）内。其中：
+----变量md 代表的是不同屏幕下的标记。
+----变量* 代表的是该列所占用的12等分数（如6/12），可选值为 1 – 12。
+----如果多个列的“等分数值”总和等于12，则刚好满行排列。如果大于12，多余的列将自动另起一行。
+
+##列可以同时出现最多四种不同的组合，分别是：xs（超小屏幕，如手机）、sm（小屏幕，如平板）、md（桌面中等屏幕）、lg（桌面大型屏幕）。
+
+##可对列追加类似 layui-col-space5、 layui-col-md-offset3 预设类来定义列的间距和偏移。
+
+##栅格的响应式能力，得益于CSS3媒体查询（Media Queries）的强力支持，从而针对四类不同尺寸的屏幕，进行相应的适配处理。
+
+类名(class)	                                          说明
+layui-show-*-block	                   定义不同设备下的 display: block; * 可选值有:xs、sm、md、lg
+layui-show-*-inline	               定义不同设备下的 display: inline; * 可选值同上
+layui-show-*-inline-block	           定义不同设备下的 display: inline-block; * 可选值同上
+layui-hide-*	                       定义不同设备下的隐藏类，即: display: none; * 可选值同上
+
+##layui栅格系统实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui的栅格系统</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+		<style>
+			div{
+				line-height:90px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container"> <!-- layui-fluid那么宽度将不会固定，而是 100% 适应 -->
+			<!-- 常规布局(以中型屏幕桌面为例): -->
+			<div class="layui-row">
+				<div class="layui-col-md9" style="background-color: #FF0000;">
+				你的内容 9/12
+				</div>
+				<div class="layui-col-md3" style="background-color: #00FF00;">
+				你的内容 3/12
+				</div>
+			</div>
+			<!-- 移动设备、平板、桌面端的不同表现: -->
+			<div class="layui-row">
+				<div class="layui-col-xs6 layui-col-sm6 layui-col-md4" style="background-color: #FFFF00;">
+				移动:6/12 | 平板:6/12 | 桌面:4/12
+				</div>
+				<div class="layui-col-xs6 layui-col-sm6 layui-col-md4" style="background-color: #FF00FF;">
+				移动:6/12 | 平板:6/12 | 桌面:4/12
+				</div>
+				<div class="layui-col-xs4 layui-col-sm12 layui-col-md4" style="background-color: #00FFFF;">
+				移动:4/12 | 平板:12/12 | 桌面:4/12
+				</div>
+				<div class="layui-col-xs4 layui-col-sm7 layui-col-md8" style="background-color: #FF0000;">
+				移动:4/12 | 平板:7/12 | 桌面:8/12
+				</div>
+				<div class="layui-col-xs4 layui-col-sm5 layui-col-md4" style="background-color: #00FF00;">
+				移动:4/12 | 平板:5/12 | 桌面:4/12
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+**layui列间距
+
+##通过“列间距”的预设类，来设定列之间的间距。且一行中最左的列不会出现左边距，最右的列不会出现右边距。列间距在保证排版美观的同时，还可以进一步
+保证分列的宽度精细程度。预设了 12 种不同尺寸的边距，分别是：
+
+layui-col-space1 列之间间隔 1px
+layui-col-space3 列之间间隔 3px
+layui-col-space5 列之间间隔 5px
+layui-col-space8 列之间间隔 8px
+layui-col-space10 列之间间隔 10px
+layui-col-space12 列之间间隔 12px
+layui-col-space15 列之间间隔 15px
+layui-col-space18 列之间间隔 18px
+layui-col-space20 列之间间隔 20px
+layui-col-space22 列之间间隔 22px
+layui-col-space28 列之间间隔 28px
+layui-col-space30 列之间间隔 30px
+
+##对列追加类似 layui-col-md-offset* 的预设类，从而让列向右偏移。
+
+##其中 * 号代表的是偏移占据的列数，可选中为 1 - 12。
+
+##如：layui-col-md-offset3，即代表在“中型桌面屏幕”下，让该列向右偏移3个列宽度下面是一个采用“列偏移”机制让两个列左右对齐的实例.
+
+##layui列间距和列偏移实例：
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui的栅格系统</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+		<style>
+			div{
+				line-height:90px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container" style="background-color: #CCCCCC;">
+			<div class="layui-row layui-col-space10">
+			  <div class="layui-col-md4" style="background-color: #FF0000;">
+			    1/3
+			  </div>
+			  <div class="layui-col-md4" style="background-color: #00FF00;">
+			    1/3
+			  </div>
+			  <div class="layui-col-md4" style="background-color: #0000FF;">
+			    1/3
+			  </div>
+			</div>
+		</div>
+		<div class="layui-container" style="background-color: #CCCCCC;">
+			<div class="layui-row layui-col-space10">
+			  <div class="layui-col-md4" style="background-color: #FF0000;">
+			    1/3
+			  </div>
+			  <div class="layui-col-md4 layui-col-md-offset4" style="background-color: #0000FF;">
+			    1/3
+			  </div>
+			</div>
+		</div>
+	</body>
+</html>
+
+**layui颜色
+
+##常用颜色
+
+----#009688 通常用于按钮、及任何修饰元素
+----#5FB878一般用于选中状态
+----#393D49 通常用于导航
+----#1E9FFF比较适合一些鲜艳色系的页面
+
+##场景色
+
+----#FFB800 暖色系，一般用于提示性元素
+----#FF5722 比较引人注意的颜色
+----#01AAED 用于文字着色，如链接文本
+----#2F4056 侧边或底边普遍采用的颜色
+
+##极简中性色
+
+----#F0F0F0
+----#F2F2F2
+----#EEEEEE
+----#E2E2E2
+----#DDDDDD
+----#D2D2D2
+----#C2C2C2
+
+##内置背景色CSS类
+
+----赤色：class="layui-bg-red"
+----橙色：class="layui-bg-orange"
+----墨绿：class="layui-bg-green"
+----藏青：class="layui-bg-cyan"
+----蓝色：class="layui-bg-blue"
+----雅黑：class="layui-bg-black"
+
+##layui背景色实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui背景色</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+		<style>
+			div{
+				line-height:90px;
+				text-indent: 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container">
+			<div class="layui-row">
+				<div class="layui-col-md4 layui-bg-red">
+					赤色
+				</div>
+				<div class="layui-col-md4 layui-bg-orange">
+					橙色
+				</div>
+				<div class="layui-col-md4 layui-bg-green">
+					墨绿
+				</div>
+				<div class="layui-col-md4 layui-bg-cyan">
+					藏青
+				</div>
+				<div class="layui-col-md4 layui-bg-blue">
+					蓝色
+				</div>
+				<div class="layui-col-md4 layui-bg-black">
+					雅黑
+				</div>
+				<div class="layui-col-md4 layui-bg-gray">
+					银灰
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+**layui图标库
+
+##默认内置提供168个字体图标，其字体库采用阿里巴巴的iconfont库，好处是对于图标处理你只需要当作字体通过
+css来控制其颜色、字体大小等属性，通过 font-class 或 unicode 多种方式来定义不同的图标。
+
+##<i class="layui-icon layui-icon-rate"></i> 
+//第一个class注明为使用的是layui-icon字体，第二个class即为对应图标的class名称
+
+##<i class="layui-icon">&#xe6c9;</i> 
+//使用unicode方式，早期layui版本即使用的此种方式
+
+**layui动画
+
+##layui提供的css3基础动画在layui的许多交互元素中发挥着重要作用，由于使用的是css3，layui的部分动画在IE8/9
+下是不被支持。
+
+##layui动画实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui动画</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+	</head>
+	<body>
+	<div style="padding: 50px">
+		<button class="layui-btn layui-anim layui-anim-up">up的按钮</button>
+		<button class="layui-btn layui-anim layui-anim-upbit">upbit</button>
+		<button class="layui-btn layui-anim layui-anim-scale">scale的按钮</button>
+		<button class="layui-btn layui-anim layui-anim-scaleSpring">Spring的按钮</button>
+		<button class="layui-btn layui-anim layui-anim-rotate layui-anim-loop">循环播放按钮</button>
+		<a href="https://layui.dev/docs/2.8/" class="layui-btn ">一个可跳转的按钮</a>
+	</div>
+	</body>
+</html>
+
+
+

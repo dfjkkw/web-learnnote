@@ -1,0 +1,72 @@
+**layui弹层组件
+
+##弹层组件
+ ----layer 是作为 layui 的一个弹层模块，也可以独立使用。官方文档提到的基础参数主要指调用方法时用到的配置项，
+如：layer.open({content: ‘’})，layer.msg('', {time: 3})等，其中的content和time即是基础参数，以键值形式存在，
+基础参数可合理应用于任何层类型中，您不需要所有都去配置，大多数都是可选的。而其中的layer.open、layer.msg
+就是内置方法。
+
+##type - 基本层类型
+----类型：Number，默认：0
+----layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）。 
+若你采用layer.open({type: 1})方式调用，则type为必填项（信息框除外）
+
+##icon - 图标。信息框和加载层的私有参数
+----类型：Number，默认：-1（信息框）/0（加载层）
+----信息框默认不显示图标。当你想显示图标时，默认皮肤可以传入0-6如果是加载层，可以传入0-2。
+
+##btn - 按钮
+----类型：String/Array，默认：'确认'
+----信息框模式时，btn默认是一个确认按钮，其它层类型则默认不显示，加载层和tips层则无效。当您只想自定义一个
+    按钮时，你可以btn: '我知道了'，当你要定义两个按钮时，你可以btn: ['yes', 'no']。当然，你也可以定义更多按钮，
+    比如：btn: ['按钮1', '按钮2', '按钮3', …]，按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推。
+
+##anim - 弹出动画
+----类型：Number，默认：0
+----出场动画全部采用CSS3。这意味着除了ie6-9，其它所有浏览器都是支持的。目前anim可支持的动画类型有0-6 如果
+    不想显示动画，设置 anim: -1 即可。另外需要注意的是，3.0之前的版本用的是 shift 参数。
+
+  值	      备注
+anim: 0	平滑放大。默认
+anim: 1	从上掉落
+anim: 2	从最底部往上滑入
+anim: 3	从左滑入
+anim: 4	从左翻滚
+anim: 5	渐显
+anim: 6	抖动
+
+##layui弹层组件实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+	</head>
+	<body>
+		<script src="layui/layui.js"></script>
+		<script>
+			layui.use(['layer'], function(){
+				var layer = layui.layer;
+				
+				//eg1
+				layer.msg('只想弱弱提示');
+				//eg2
+				layer.msg('有表情地提示', {icon: 6}); 
+				//eg3
+				layer.msg('关闭后想做些什么', function(){
+				  //do something
+				}); 
+				//eg
+				layer.msg('同上', {
+				  icon: 1,
+				  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+				}, function(){
+				  //do something
+				});   
+				
+			});
+		</script>
+	</body>
+</html>

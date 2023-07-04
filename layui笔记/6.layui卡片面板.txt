@@ -1,0 +1,113 @@
+**layui卡片面板
+
+##卡片面板
+
+##卡片式面板面板通常用于非白色背景色的主体内，从而映衬出边框投影。结合 layui 的栅格系统，轻松实现响应式布局。
+
+##一般在使用卡片面板时建议背景不使用白色，卡片面板默认是白色背景。如果你的网页采用的是默认的白色背景，不建议使用卡片面板。
+
+##涉及样式：layui-card、layui-card-header、layui-card-body
+
+**layui折叠面板
+
+##折叠面板
+
+##折叠为多个层次，点击某层次可以弹开或关闭内容。通过对内容元素设置class为 layui-show 来选择性初始展开某一个面板，element 模块会自动呈现状态图标。
+
+##涉及样式：layui-collapse、 layui-colla-item、layui-colla-title、layui-colla-content layui-show
+
+**layui开启手风琴
+
+##开启手风琴
+
+##在折叠面板的父容器设置属性 lay-accordion 来开启手风琴，那么在进行折叠操作时，始终只会展现当前的面板。实现多个层次至多弹开一个。
+
+##涉及折叠面板的样式：layui-collapse、 layui-colla-item、layui-colla-title、layui-colla-content layui-show
+
+##父容器重要属性： lay-accordion
+
+##layui面板实例:
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layui卡片面板</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+		<style>
+			body{
+				background-color: #F2F2F2;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container">
+			<div class="layui-row layui-col-space10">
+				<div class="layui-col-md8">
+					<div class="layui-card ">
+						<div class="layui-card-header">卡片面板</div>
+						<div class="layui-card-body">
+							卡片式面板面板通常用于非白色背景色的主体内<br>
+							从而映衬出边框投影
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-md4">
+					<div class="layui-card">
+						<div class="layui-card-header">卡片面板</div>
+						<div class="layui-card-body">
+							结合 layui 的栅格系统<br>
+							轻松实现响应式布局
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-row layui-col-space10">
+				<div class="layui-col-md12">
+					<div class="layui-collapse" style="background-color: #ffffff">
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title">杜甫</h2>
+							<div class="layui-colla-content layui-show">内容区域</div>
+						</div>
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title">李清照</h2>
+							<div class="layui-colla-content layui-show">内容区域</div>
+						</div>
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title">鲁迅</h2>
+							<div class="layui-colla-content layui-show">内容区域</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-row layui-col-space10">
+				<div class="layui-col-md12">
+					<div class="layui-collapse" lay-accordion style="background-color: #ffffff">
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title">杜甫</h2>
+							<div class="layui-colla-content layui-show">内容区域</div>
+						</div>
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title">李清照</h2>
+							<div class="layui-colla-content">内容区域</div>
+						</div>
+						<div class="layui-colla-item">
+							<h2 class="layui-colla-title">鲁迅</h2>
+							<div class="layui-colla-content">内容区域</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="layui/layui.js"></script>
+		<script>
+			//注意：导航 依赖 element 模块，否则无法进行功能性操作
+			layui.use('element', function(){
+				var element = layui.element;
+		
+				//…
+			});
+		</script>
+	</body>
+</html>
+
